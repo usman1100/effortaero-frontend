@@ -1,4 +1,5 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { useQuery } from "react-query";
 import { LoginDetails } from "../lib/api";
 import { AuthService } from "../lib/api/auth";
@@ -14,14 +15,24 @@ function Login({ setAuthPage }: LoginPageProps) {
     password: "",
   });
 
-  const { data, error, refetch } = useQuery(
+  const {  refetch, isLoading , isFetching} = useQuery(
     "login",
     () => {
-      authAPI.login(loginInfo);
+      return authAPI.login(loginInfo);
     },
     {
       enabled: false,
       refetchInterval: Infinity,
+      retry:false,
+      onError: (err:any) => {
+
+        toast.error(err.response.data.message)
+        
+      },
+      onSuccess: (data:any) => {
+        localStorage.setItem("token", data.token);
+        toast.success("Login Successful")
+      }
     }
   );
 
@@ -76,7 +87,7 @@ function Login({ setAuthPage }: LoginPageProps) {
 
         <button
           type="submit"
-          className="w-1/2 mx-auto btn btn-primary capitalize"
+          className={`w-1/2 mx-auto btn ${isLoading || isFetching ?'loading disabled':'btn-primary'} capitalize`}
         >
           Login
         </button>
