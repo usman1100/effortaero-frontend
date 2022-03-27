@@ -1,6 +1,6 @@
-import GitHubIcon from "../assets/images/icons/icons8-octocat.svg";
-import GoogleLogo from "../assets/images/icons/icons8-google.svg";
-import FacebookLogo from "../assets/images/icons/icons8-facebook.svg";
+import GitHubIcon from "../../assets/images/icons/icons8-octocat.svg";
+import GoogleLogo from "../../assets/images/icons/icons8-google.svg";
+import FacebookLogo from "../../assets/images/icons/icons8-facebook.svg";
 import Login from "./Login";
 import { useState } from "react";
 import Register from "./Register";

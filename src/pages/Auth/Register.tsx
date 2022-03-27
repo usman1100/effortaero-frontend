@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useQuery } from "react-query";
-import { AuthService } from "../lib/api/auth";
+import { AuthService } from "../../lib/api/auth";
 
 interface RegisterPageProps {
   setAuthPage: Function;

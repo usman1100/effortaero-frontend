@@ -1,8 +1,8 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useQuery } from "react-query";
-import { LoginDetails } from "../lib/api";
-import { AuthService } from "../lib/api/auth";
+import { LoginDetails } from "../../lib/api";
+import { AuthService } from "../../lib/api/auth";
 
 interface LoginPageProps {
   setAuthPage: Function;
