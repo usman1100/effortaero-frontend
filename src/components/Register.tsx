@@ -1,14 +1,40 @@
 import { useFormik } from "formik";
 import { useState } from "react";
+import toast from "react-hot-toast";
+import { useQuery } from "react-query";
+import { AuthService } from "../lib/api/auth";
 
 interface RegisterPageProps {
   setAuthPage: Function;
 }
 
 function Register({ setAuthPage }: RegisterPageProps) {
-  const [newOrg, setNewOrg] = useState<boolean>(false);
+  const [newOrg, setNewOrg] = useState<boolean>(false);4
 
-  
+  const authAPI = new AuthService();
+
+
+  const {  refetch, isLoading , isFetching} = useQuery(
+    "register",
+    () => {
+      return authAPI.register({
+        ...formik.values,
+        role: newOrg ? "owner" : "user"
+      });
+    },
+    {
+      enabled: false,
+      refetchInterval: Infinity,
+      retry:false,
+      onError: (err:any) => {
+        toast.error(err.response.data.message)
+      },
+      onSuccess: (data:any) => {
+        localStorage.setItem("token", data.token);
+        toast.success("Registration Successful Successful")
+      }
+    }
+  );
   
 
 
@@ -18,10 +44,10 @@ function Register({ setAuthPage }: RegisterPageProps) {
       email:"",
       newPassword:"",
       confirmPassword:"",
-      orgName:"",
     },
     validate,
     onSubmit: (values) => {
+      refetch()
       console.log(values);
     }
   })
@@ -71,6 +97,8 @@ function Register({ setAuthPage }: RegisterPageProps) {
             type="email"
             name="email"
             autoComplete="email"
+            value={formik.values.email}
+            onChange={formik.handleChange}
           />
           <input
             required
@@ -116,19 +144,7 @@ function Register({ setAuthPage }: RegisterPageProps) {
             </label>
           </div>
 
-          {newOrg && (
-            <input
-              required
-              className={
-                `input input-bordered 
-                ${formik.touched.orgName && formik.errors.orgName ? "input-error" : "input-success"}`
-              }
-              placeholder="Enter your organization name"
-              type="text"
-              name="organization-name"
-              autoComplete="organization-name"
-            />
-          )}
+          
         </div>
 
         <p
