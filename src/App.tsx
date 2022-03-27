@@ -1,11 +1,18 @@
 import { Toaster } from "react-hot-toast";
-import { Auth } from "./components/Auth";
-import Login from "./components/Login";
+import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
+import { Auth } from "./pages/Auth";
 
 function App() {
   return (
     <>
-      <Auth />
+      <BrowserRouter>
+
+        <Routes>
+          <Route path="/" element={<Auth />} />          
+        </Routes>
+
+      </BrowserRouter>
+
       <Toaster/>
     </>
   );
