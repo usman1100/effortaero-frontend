@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { useQuery } from 'react-query'
+import { useNavigate } from 'react-router-dom'
 import { LoginDetails } from '../../lib/api'
 import AuthService from '../../lib/api/auth'
 
@@ -14,6 +15,7 @@ function Login({ setAuthPage }: LoginPageProps) {
 		email: '',
 		password: '',
 	})
+	const redirect = useNavigate()
 
 	const { refetch, isLoading, isFetching } = useQuery(
 		'login',
@@ -28,6 +30,7 @@ function Login({ setAuthPage }: LoginPageProps) {
 			onSuccess: (data: any) => {
 				localStorage.setItem('token', data.token)
 				toast.success('Login Successful')
+				redirect('/dashboard')
 			},
 		}
 	)
