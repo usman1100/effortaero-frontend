@@ -13,7 +13,10 @@ function Login({ setAuthPage }: LoginPageProps) {
     email: "",
     password: "",
   });
-
+  // const [email, setemail] = useState("");
+  // const [password, setPassword] = useState("");
+   const [usererror, setUserError] = useState("");
+  const [passerror, setPassError] = useState("");
   const { data, error, refetch } = useQuery(
     "login",
     () => {
@@ -24,17 +27,37 @@ function Login({ setAuthPage }: LoginPageProps) {
       refetchInterval: Infinity,
     }
   );
-
+  const validate = () => {
+    const errors = {};
+    if (email.length < 3) {
+      errors.email = "Username must be atleast 3 characters";
+    }
+    if (password.length < 3) {
+      errors.password = "Password must be atleast 3 characters";
+    }
+    return Object.keys(errors).length === 0 ? null : errors;
+  };
+ 
+const handleSubmit = (e) => {
+  e.preventDefault();
+  refetch();
+  const errors = validate();
+  if (errors) {
+    setUserError(errors.username);
+    setPassError(errors.password);
+  } else {
+    setUserError("");
+    setPassError("");
+  }
+}
   return (
     <>
       <h1 className="font-bold text-3xl mb-5">Sign In</h1>
 
       <form
         className="form-control flex w-2/3 mx-auto"
-        onSubmit={(e) => {
-          e.preventDefault();
-          refetch();
-        }}
+        onSubmit={handleSubmit }
+      
       >
         <input
           className="input input-bordered input-success"
@@ -47,6 +70,7 @@ function Login({ setAuthPage }: LoginPageProps) {
             setLoginInfo({ ...loginInfo, email: e.target.value })
           }
         />
+          <div className="text-red-500 text-sm">{usererror}</div>
 
         <input
           className="input input-bordered input-success my-5"
@@ -59,6 +83,8 @@ function Login({ setAuthPage }: LoginPageProps) {
             setLoginInfo({ ...loginInfo, password: e.target.value })
           }
         />
+                  <div className="text-red-500 text-sm">{passerror}</div>
+
 
         <div className="flex">
           <p
