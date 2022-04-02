@@ -1,4 +1,5 @@
 import useCreatedOrgs from '../lib/hooks/organizations/useCreatedOrgs'
+import CreateOrg from './CreateOrg'
 
 export default function Organization() {
 	const { data, error, isError, isLoading, isSuccess } = useCreatedOrgs()
@@ -12,6 +13,8 @@ export default function Organization() {
 			</div>
 		)
 
+	console.log(data)
+
 	return (
 		<>
 			{isLoading && <>Loading...</>}
@@ -24,7 +27,7 @@ export default function Organization() {
 							<p>Deer</p>
 						</>
 					) : (
-						<p>You dont have any organizations yet</p>
+						<CreateOrg />
 					)}
 				</div>
 			)}
