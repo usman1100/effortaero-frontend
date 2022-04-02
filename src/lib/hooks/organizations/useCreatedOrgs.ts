@@ -4,5 +4,5 @@ import OrgService from '../../api/org'
 export default function useCreatedOrgs() {
 	const orgAPI = new OrgService()
 
-	return useQuery(['orgs', 'created'], () => orgAPI.createdOrgs())
+	return useQuery<any, any>(['orgs', 'created'], () => orgAPI.createdOrgs())
 }
