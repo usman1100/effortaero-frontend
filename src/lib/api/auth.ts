@@ -4,7 +4,7 @@ import { LoginDetails, RegisterDetails } from './types'
 export default class AuthService extends BaseService {
 	private prefix = `${this.baseURL}/auth`
 
-	login = async (loginDetails: LoginDetails) => {
+	login = (loginDetails: LoginDetails) => {
 		try {
 			return this.post(`${this.prefix}/login`, loginDetails)
 		} catch (error: any) {
@@ -12,7 +12,7 @@ export default class AuthService extends BaseService {
 		}
 	}
 
-	register = async (registerDetails: RegisterDetails) => {
+	register = (registerDetails: RegisterDetails) => {
 		try {
 			return this.post(`${this.prefix}/register`, {
 				...registerDetails,
