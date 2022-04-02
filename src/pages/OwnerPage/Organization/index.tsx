@@ -1,7 +1,7 @@
-import useMyOrgs from '../../../lib/hooks/organizations/useMyOrg'
+import useCreatedOrgs from '../../../lib/hooks/organizations/useCreatedOrgs'
 
 export default function Organization() {
-	const { data, error, isError, isLoading, isSuccess } = useMyOrgs()
+	const { data, error, isError, isLoading, isSuccess } = useCreatedOrgs()
 
 	if (isError && error?.response?.data?.statusCode) return <>Unauthorized</>
 
