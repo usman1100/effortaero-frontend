@@ -16,7 +16,6 @@ export default function Auth() {
 
 	const isLoggedIn = AuthStore(state => state.isLoggedIn)
 	React.useEffect(() => {
-		toast.success('Redirected')
 		if (isLoggedIn) redirect('/dashboard')
 	}, [])
 

@@ -6,6 +6,7 @@ interface AuthStoreInterface {
 	token: string
 	role: string
 	login: (token: string, role: string) => void
+	logout: () => void
 }
 
 const AuthStore = create<AuthStoreInterface>(
@@ -22,6 +23,13 @@ const AuthStore = create<AuthStoreInterface>(
 						token,
 						role,
 					})),
+				logout: () =>
+					set(state => ({
+						...state,
+						isLoggedIn: false,
+						token: '',
+						role: '',
+					})),
 			}),
 			{
 				name: 'auth',
@@ -32,16 +40,3 @@ const AuthStore = create<AuthStoreInterface>(
 )
 
 export default AuthStore
-
-// set => ({
-// 	isLoggedIn: false,
-// 	token: '',
-// 	role: '',
-// 	login: (token: string, role: string) =>
-// 		set(state => ({
-// 			...state,
-// 			isLoggedIn: true,
-// 			token,
-// 			role,
-// 		})),
-// })

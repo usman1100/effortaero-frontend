@@ -5,6 +5,7 @@ import NotFound from './pages/404'
 import Auth from './pages/Auth'
 import Dashboard from './pages/Dashboard'
 import Organization from './pages/OwnerPage/Organization'
+import Settings from './pages/Settings'
 
 function App() {
 	return (
@@ -25,7 +26,7 @@ function App() {
 
 						<Route
 							path='/dashboard/setting'
-							element={<>Settings</>}
+							element={<Settings />}
 						/>
 					</Route>
 					<Route path='*' element={<NotFound />} />

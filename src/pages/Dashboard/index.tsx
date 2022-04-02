@@ -1,11 +1,19 @@
-import { useState } from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
+import AuthStore from '../../lib/state/authStore'
 import Navbar from '../Navbar'
 
 export default function Dashboard() {
 	const items = ['organization', 'projects', 'setting']
 
 	const [selectedItem, setSelectedItem] = useState(0)
+
+	const isLoggedin = AuthStore(state => state.isLoggedIn)
+	const redirect = useNavigate()
+
+	useEffect(() => {
+		if (!isLoggedin) redirect('/')
+	}, [])
 
 	return (
 		<div>
