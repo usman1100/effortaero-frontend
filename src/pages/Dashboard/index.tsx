@@ -15,6 +15,7 @@ export default function Dashboard() {
 					{items.map((item, index) => (
 						<Link to={`/dashboard/${item}`} key={item}>
 							<button
+								key={item}
 								type='button'
 								onClick={() => setSelectedItem(index)}
 								className={`btn 
