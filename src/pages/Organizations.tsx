@@ -1,4 +1,4 @@
-import useCreatedOrgs from '../../../lib/hooks/organizations/useCreatedOrgs'
+import useCreatedOrgs from '../lib/hooks/organizations/useCreatedOrgs'
 
 export default function Organization() {
 	const { data, error, isError, isLoading, isSuccess } = useCreatedOrgs()

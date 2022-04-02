@@ -1,4 +1,4 @@
-import useMyDetails from '../../lib/hooks/user/useMyDetails'
+import useMyDetails from '../lib/hooks/user/useMyDetails'
 
 export default function Navbar() {
 	const { data, isLoading } = useMyDetails()

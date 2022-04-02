@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import AuthStore from '../../lib/state/authStore'
+import AuthStore from '../lib/state/authStore'
 
 export default function Settings() {
 	const logout = AuthStore(state => state.logout)

@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import NotFound from './pages/404'
 import Auth from './pages/Auth'
 import Dashboard from './pages/Dashboard'
-import Organization from './pages/OwnerPage/Organization'
+import Organization from './pages/Organizations'
 import Settings from './pages/Settings'
 
 function App() {
