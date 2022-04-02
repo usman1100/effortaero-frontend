@@ -1,5 +1,5 @@
 import create from 'zustand'
-import { persist } from 'zustand/middleware'
+import { devtools, persist } from 'zustand/middleware'
 
 interface AuthStoreInterface {
 	isLoggedIn: boolean
@@ -9,23 +9,25 @@ interface AuthStoreInterface {
 }
 
 const AuthStore = create<AuthStoreInterface>(
-	persist<AuthStoreInterface>(
-		set => ({
-			isLoggedIn: false,
-			token: '',
-			role: '',
-			login: (token: string, role: string) =>
-				set(state => ({
-					...state,
-					isLoggedIn: true,
-					token,
-					role,
-				})),
-		}),
-		{
-			name: 'auth',
-			version: 1,
-		}
+	devtools(
+		persist<AuthStoreInterface>(
+			set => ({
+				isLoggedIn: false,
+				token: '',
+				role: '',
+				login: (token: string, role: string) =>
+					set(state => ({
+						...state,
+						isLoggedIn: true,
+						token,
+						role,
+					})),
+			}),
+			{
+				name: 'auth',
+				version: 1,
+			}
+		)
 	)
 )
 

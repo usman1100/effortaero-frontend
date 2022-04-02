@@ -1,13 +1,25 @@
-import { useState } from 'react'
-import GitHubIcon from '../../assets/images/icons/icons8-octocat.svg'
-import GoogleLogo from '../../assets/images/icons/icons8-google.svg'
+import React, { useState } from 'react'
+import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 import FacebookLogo from '../../assets/images/icons/icons8-facebook.svg'
+import GoogleLogo from '../../assets/images/icons/icons8-google.svg'
+import GitHubIcon from '../../assets/images/icons/icons8-octocat.svg'
+import AuthStore from '../../lib/state/authStore'
 import Login from './Login'
 import Register from './Register'
 
 export default function Auth() {
 	const logoSize = 30
 	const [authPage, setAuthPage] = useState('login')
+
+	const redirect = useNavigate()
+
+	const isLoggedIn = AuthStore(state => state.isLoggedIn)
+	React.useEffect(() => {
+		toast.success('Redirected')
+		if (isLoggedIn) redirect('/dashboard')
+	}, [])
+
 	return (
 		<div className='flex'>
 			<div className='h-screen w-2/3 flex bg-blue-400 p-5'>
