@@ -6,17 +6,19 @@ import useCreatedOrgs from './useCreatedOrgs'
 export default function useCreateNewOrg(name: string) {
 	const orgAPI = new OrgService()
 
-	return useQuery(['org', 'new'], () => orgAPI.create(name), {
+	const { refetch } = useCreatedOrgs()
+
+	return useQuery(['orgs', 'new'], () => orgAPI.create(name), {
 		enabled: false,
 		refetchInterval: Infinity,
 		retry: false,
 
 		onSuccess: () => {
 			toast.success('Created new organization')
-			useCreatedOrgs()
 		},
 		onError: (error: any) => {
 			toast.error(error.response.data.message)
+			refetch()
 		},
 	})
 }

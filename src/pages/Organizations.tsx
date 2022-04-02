@@ -1,8 +1,13 @@
+import { useState } from 'react'
+import OrganizationItem from '../components/OrganizationItem'
 import useCreatedOrgs from '../lib/hooks/organizations/useCreatedOrgs'
+import { OrgInfo } from '../types/orgs'
 import CreateOrg from './CreateOrg'
 
 export default function Organization() {
 	const { data, error, isError, isLoading, isSuccess } = useCreatedOrgs()
+
+	const [display, setDisplay] = useState(false)
 
 	if (isError && error?.response?.data?.statusCode) return <>Unauthorized</>
 
@@ -13,8 +18,6 @@ export default function Organization() {
 			</div>
 		)
 
-	console.log(data)
-
 	return (
 		<>
 			{isLoading && <>Loading...</>}
@@ -23,12 +26,27 @@ export default function Organization() {
 				<div>
 					{data?.data?.data?.length ? (
 						<>
-							<h1>Hello</h1>
-							<p>Deer</p>
+							{data.data.data.map((org: OrgInfo) => (
+								<OrganizationItem
+									key={org.name}
+									name={org.name}
+									createdAt={org.createdAt}
+								/>
+							))}
 						</>
 					) : (
-						<CreateOrg />
+						<>You have not created any organizations yet</>
 					)}
+
+					<button
+						className='btn btn-primary m-5'
+						onClick={() => setDisplay(prev => !prev)}
+						type='button'
+					>
+						Create Organization
+					</button>
+
+					{display && <CreateOrg />}
 				</div>
 			)}
 		</>
