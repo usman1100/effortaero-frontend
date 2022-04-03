@@ -20,12 +20,18 @@ export default function Dashboard() {
 
 	useEffect(() => {
 		if (!isLoggedin) redirect('/')
+
+		if (tokenInvalid) {
+			logout()
+			toast.error('Session expired, please login again')
+			redirect('/')
+		}
 	}, [])
 
 	useEffect(() => {
-		if (!validateLoading && tokenInvalid) {
-			toast.error('Session expired, please login again')
+		if (tokenInvalid) {
 			logout()
+			toast.error('Session expired, please login again')
 			redirect('/')
 		}
 	}, [tokenInvalid])

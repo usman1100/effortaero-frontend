@@ -5,7 +5,7 @@ export default function useValidate() {
 	const authAPI = new AuthService()
 
 	return useQuery('validate', authAPI.validate, {
-		refetchInterval: 1000,
+		refetchInterval: 1000 * 60,
 		refetchOnWindowFocus: false,
 		retry: 1,
 	})

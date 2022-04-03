@@ -21,9 +21,6 @@ export default function useLogin(loginInfo: LoginDetails) {
 		},
 		onSuccess: (data: any) => {
 			const info = data.data.data
-			// axios.defaults.headers.common = {
-			// 	Authorization: `Bearer ${info.token}`,
-			// }
 			login(info.token, info.user.role)
 			toast.success('Login Successful')
 			redirect('/dashboard/organization')
