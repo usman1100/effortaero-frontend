@@ -1,19 +1,34 @@
 import { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 import { Link, Outlet, useNavigate } from 'react-router-dom'
+import useValidate from '../lib/hooks/auth/useValidate'
 import AuthStore from '../lib/state/authStore'
 import Navbar from './Navbar'
 
+const items = ['organization', 'projects', 'setting']
+
 export default function Dashboard() {
-	const items = ['organization', 'projects', 'setting']
+	const { isError: tokenInvalid, isLoading: validateLoading } = useValidate()
 
 	const [selectedItem, setSelectedItem] = useState(0)
 
 	const isLoggedin = AuthStore(state => state.isLoggedIn)
+
+	const logout = AuthStore(state => state.logout)
+
 	const redirect = useNavigate()
 
 	useEffect(() => {
 		if (!isLoggedin) redirect('/')
 	}, [])
+
+	useEffect(() => {
+		if (!validateLoading && tokenInvalid) {
+			toast.error('Session expired, please login again')
+			logout()
+			redirect('/')
+		}
+	}, [tokenInvalid])
 
 	return (
 		<div>
