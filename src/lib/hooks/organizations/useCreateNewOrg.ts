@@ -15,10 +15,10 @@ export default function useCreateNewOrg(name: string) {
 
 		onSuccess: () => {
 			toast.success('Created new organization')
+			refetch()
 		},
 		onError: (error: any) => {
 			toast.error(error.response.data.message)
-			refetch()
 		},
 	})
 }

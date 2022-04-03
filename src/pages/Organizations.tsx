@@ -23,7 +23,7 @@ export default function Organization() {
 			{isLoading && <>Loading...</>}
 			<>{JSON.stringify(error?.response?.data)}</>
 			{isSuccess && (
-				<div>
+				<div className='grid grid-cols-2 justify-items-center mt-10'>
 					{data?.data?.data?.length ? (
 						<>
 							{data.data.data.map((org: OrgInfo) => (
@@ -37,18 +37,17 @@ export default function Organization() {
 					) : (
 						<>You have not created any organizations yet</>
 					)}
-
-					<button
-						className='btn btn-primary m-5'
-						onClick={() => setDisplay(prev => !prev)}
-						type='button'
-					>
-						Create Organization
-					</button>
-
-					{display && <CreateOrg />}
 				</div>
 			)}
+			<button
+				className='btn btn-primary m-5'
+				onClick={() => setDisplay(prev => !prev)}
+				type='button'
+			>
+				Create Organization
+			</button>
+
+			{display && <CreateOrg />}
 		</>
 	)
 }
