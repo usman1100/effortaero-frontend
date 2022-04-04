@@ -12,21 +12,18 @@ function Login({ setAuthPage }: LoginPageProps) {
 			password: '',
 		},
 		onSubmit: () => {
-			refetch()
+			mutate()
 		},
 	})
 
-	const { refetch, isLoading, isFetching } = useLogin(formik.values)
+	const { isLoading, mutate } = useLogin(formik.values)
 	return (
 		<>
 			<h1 className='font-bold text-3xl mb-5'>Sign In</h1>
 
 			<form
 				className='form-control flex w-2/3 mx-auto'
-				onSubmit={e => {
-					e.preventDefault()
-					refetch()
-				}}
+				onSubmit={formik.handleSubmit}
 			>
 				<input
 					className='input input-bordered input-success'
@@ -66,9 +63,7 @@ function Login({ setAuthPage }: LoginPageProps) {
 				<button
 					type='submit'
 					className={`w-1/2 mx-auto btn ${
-						isLoading || isFetching
-							? 'loading disabled'
-							: 'btn-primary'
+						isLoading ? 'loading disabled' : 'btn-primary'
 					} capitalize`}
 				>
 					Login

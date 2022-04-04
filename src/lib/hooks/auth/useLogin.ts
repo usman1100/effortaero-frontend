@@ -1,6 +1,5 @@
-import axios from 'axios'
 import toast from 'react-hot-toast'
-import { useQuery } from 'react-query'
+import { useMutation } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 import { LoginDetails } from '../../api'
 import AuthService from '../../api/auth'
@@ -12,9 +11,7 @@ export default function useLogin(loginInfo: LoginDetails) {
 
 	const login = AuthStore(state => state.login)
 
-	return useQuery('login', () => authAPI.login(loginInfo), {
-		enabled: false,
-		refetchInterval: Infinity,
+	return useMutation(() => authAPI.login(loginInfo), {
 		retry: false,
 		onError: (err: any) => {
 			toast.error(err?.response?.data?.message || 'An error has occurred')
