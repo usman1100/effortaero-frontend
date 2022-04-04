@@ -7,11 +7,11 @@ export default function CreateOrg() {
 			name: '',
 		},
 		onSubmit: () => {
-			refetch()
+			mutate()
 			formik.resetForm()
 		},
 	})
-	const { refetch } = useCreateNewOrg(formik.values.name)
+	const { mutate } = useCreateNewOrg(formik.values.name)
 
 	return (
 		<>

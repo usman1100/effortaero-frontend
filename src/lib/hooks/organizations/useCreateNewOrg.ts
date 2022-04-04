@@ -1,5 +1,5 @@
 import toast from 'react-hot-toast'
-import { useQuery } from 'react-query'
+import { useMutation } from 'react-query'
 import OrgService from '../../api/org'
 import useCreatedOrgs from './useCreatedOrgs'
 
@@ -8,9 +8,7 @@ export default function useCreateNewOrg(name: string) {
 
 	const { refetch } = useCreatedOrgs()
 
-	return useQuery(['orgs', 'new'], () => orgAPI.create(name), {
-		enabled: false,
-		refetchInterval: Infinity,
+	return useMutation(() => orgAPI.create(name), {
 		retry: false,
 
 		onSuccess: () => {
