@@ -1,19 +1,18 @@
 import toast from 'react-hot-toast'
-import { useMutation } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 import OrgService from '../../api/org'
-import useCreatedOrgs from './useCreatedOrgs'
 
 export default function useCreateNewOrg(name: string) {
 	const orgAPI = new OrgService()
 
-	const { refetch } = useCreatedOrgs()
+	const queryClient = useQueryClient()
 
 	return useMutation(() => orgAPI.create(name), {
 		retry: false,
 
 		onSuccess: () => {
 			toast.success('Created new organization')
-			refetch()
+			queryClient.invalidateQueries(['orgs', 'created'])
 		},
 		onError: (error: any) => {
 			toast.error(error.response.data.message)
