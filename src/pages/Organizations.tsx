@@ -23,7 +23,7 @@ export default function Organization() {
 			{isLoading && <>Loading...</>}
 			<>{JSON.stringify(error?.response?.data)}</>
 			{isSuccess && (
-				<div className='grid grid-cols-2 justify-items-center mt-10'>
+				<div className='grid grid-cols-1  mt-10'>
 					{data?.data?.data?.length ? (
 						<>
 							{data.data.data.map((org: OrgInfo) => (
