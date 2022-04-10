@@ -21,7 +21,6 @@ export default function Organization() {
 	return (
 		<>
 			{isLoading && <>Loading...</>}
-			<>{JSON.stringify(error?.response?.data)}</>
 			{isSuccess && (
 				<div className='grid grid-cols-1  mt-10'>
 					{data?.data?.data?.length ? (

@@ -1,14 +1,30 @@
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
+import { BsBuilding } from 'react-icons/bs'
 import { Link, Outlet, useNavigate } from 'react-router-dom'
+import { AiFillProject, AiFillSetting } from 'react-icons/ai'
 import useValidate from '../lib/hooks/auth/useValidate'
 import AuthStore from '../lib/state/authStore'
 import Navbar from './Navbar'
 
-const items = ['organization', 'projects', 'setting']
+const iconSize = 25
+const items = [
+	{
+		url: 'organization',
+		icon: <BsBuilding className='mr-2' size={iconSize} />,
+	},
+	{
+		url: 'projects',
+		icon: <AiFillProject className='mr-2' size={iconSize} />,
+	},
+	{
+		url: 'setting',
+		icon: <AiFillSetting className='mr-2' size={iconSize} />,
+	},
+]
 
 export default function Dashboard() {
-	const { isError: tokenInvalid, isLoading: validateLoading } = useValidate()
+	const { isError: tokenInvalid } = useValidate()
 
 	const [selectedItem, setSelectedItem] = useState(0)
 
@@ -41,10 +57,10 @@ export default function Dashboard() {
 			<Navbar />
 			<div className='grid grid-cols-5 h-screen'>
 				<div className='px-3 border-r-2'>
-					{items.map((item, index) => (
-						<Link to={`/dashboard/${item}`} key={item}>
+					{items.map(({ url, icon }, index) => (
+						<Link to={`/dashboard/${url}`} key={url}>
 							<button
-								key={item}
+								key={url}
 								type='button'
 								onClick={() => setSelectedItem(index)}
 								className={`btn 
@@ -53,7 +69,8 @@ export default function Dashboard() {
 							${index === 0 ? 'mt-10' : ''}
 							`}
 							>
-								{item}
+								{icon}
+								{url}
 							</button>
 						</Link>
 					))}

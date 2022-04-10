@@ -16,7 +16,7 @@ export default function Auth() {
 
 	const isLoggedIn = AuthStore(state => state.isLoggedIn)
 	React.useEffect(() => {
-		if (isLoggedIn) redirect('/dashboard')
+		if (isLoggedIn) redirect('/dashboard/organization')
 	}, [])
 
 	return (
