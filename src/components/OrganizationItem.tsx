@@ -1,9 +1,13 @@
 import { BsFillPeopleFill } from 'react-icons/bs'
-
-import { OrgInfo } from '../types/orgs'
 import { formatDate } from '../utils/datetime'
 
-export default function OrganizationItem({ name, createdAt }: OrgInfo) {
+interface props {
+	name: string
+	createdAt: string
+	members: number
+}
+
+export default function OrganizationItem({ name, createdAt, members }: props) {
 	return (
 		<div className='card  bg-base-100 shadow-xl mx-5 my-2'>
 			<div className='card-body'>
@@ -12,7 +16,7 @@ export default function OrganizationItem({ name, createdAt }: OrgInfo) {
 
 				<div className='grid grid-flow-col items-center mr-auto gap-3'>
 					<BsFillPeopleFill />
-					<p>10 Employees</p>
+					<p>{members} Employees</p>
 				</div>
 				<div className='card-actions justify-end'>
 					<button type='button' className='btn btn-primary'>

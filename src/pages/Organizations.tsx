@@ -25,11 +25,12 @@ export default function Organization() {
 				<div className='grid grid-cols-1  mt-10'>
 					{data?.data?.data?.length ? (
 						<>
-							{data.data.data.map((org: OrgInfo) => (
+							{data.data.data.map((item: OrgInfo) => (
 								<OrganizationItem
-									key={org.name}
-									name={org.name}
-									createdAt={org.createdAt}
+									members={item.members.length}
+									key={item.org.name}
+									name={item.org.name}
+									createdAt={item.org.createdAt}
 								/>
 							))}
 						</>

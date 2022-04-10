@@ -1,4 +1,9 @@
 export interface OrgInfo {
-	name: string
-	createdAt: string
+	org: {
+		_id: string
+		createdBy: string
+		name: string
+		createdAt: string
+	}
+	members: any[]
 }
