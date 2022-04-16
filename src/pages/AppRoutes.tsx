@@ -4,6 +4,7 @@ import NotFound from './404'
 import Auth from './Auth'
 import Dashboard from './Dashboard'
 import Organization from './Organizations'
+import Projects from './Projects'
 import Settings from './Settings'
 
 export default function AppRoutes() {
@@ -22,7 +23,7 @@ export default function AppRoutes() {
 						element={<>hello</>}
 					/>
 
-					<Route path='/dashboard/projects' element={<>Projects</>} />
+					<Route path='/dashboard/projects' element={<Projects />} />
 
 					<Route path='/dashboard/setting' element={<Settings />} />
 				</Route>

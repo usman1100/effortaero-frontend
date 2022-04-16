@@ -9,12 +9,6 @@ module.exports = {
 	plugins: [require("daisyui")],
 	daisyui: {
 		themes: [
-			// {
-			// 	effortaero: {
-			// 		primary: "#BA3F1D",
-			// 		secondary: "#EEE3AB",
-			// 	},
-			// },
 			"light",
 			"dark",
 			"cupcake",
