@@ -1,3 +1,4 @@
+import ProjectCard from '../components/ProjectCard'
 import useGetCreatedProjects from '../lib/hooks/projects/useGetCreatedProjects'
 
 export default function Projects() {
@@ -14,9 +15,7 @@ export default function Projects() {
 			</div>
 
 			{!isLoading &&
-				data?.data?.data?.map((pro: any) => (
-					<div className='text-2xl '>{pro.name}</div>
-				))}
+				data?.data?.data?.map((pro: any) => <ProjectCard {...pro} />)}
 		</div>
 	)
 }
