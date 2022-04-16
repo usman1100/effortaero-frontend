@@ -7,12 +7,14 @@ interface Props {
 	actors: any[]
 	useCases: any[]
 	createdAt: string
+	organization: { name: string }
 }
 
 export default function ProjectCard({
 	id,
 	name,
 	actors,
+	organization,
 	useCases,
 	createdAt,
 }: Props) {
@@ -24,6 +26,7 @@ export default function ProjectCard({
 				<div className='card-body'>
 					<h2 className='card-title'>{name}</h2>
 					<p>Created At: {formatDate(createdAt)}</p>
+					<p>Organization: {organization?.name}</p>
 					<div className='card-actions justify-end'>
 						<div className='badge badge-outline'>
 							Actors: {actors.length}
