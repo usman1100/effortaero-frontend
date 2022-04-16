@@ -6,6 +6,9 @@ module.exports = {
 			sans: ["Quicksand", "Poppins", "Raleway"],
 		},
 	},
+	safelist: [
+		'bg-amber-400'
+	  ],
 	plugins: [require("daisyui")],
 	daisyui: {
 		themes: [
