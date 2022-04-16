@@ -16,6 +16,8 @@ export default function ProjectCard({
 	useCases,
 	createdAt,
 }: Props) {
+	const iconSize = 26
+
 	return (
 		<div className='flex my-5'>
 			<div className='card w-96 bg-base-100 shadow-xl' id={id}>
@@ -38,7 +40,7 @@ export default function ProjectCard({
 					className='btn btn-info btn-circle ml-4 capitalize'
 				>
 					<div className='tooltip' data-tip='More info'>
-						<AiOutlineInfoCircle size={32} />
+						<AiOutlineInfoCircle size={iconSize} />
 					</div>
 				</button>
 
@@ -47,7 +49,7 @@ export default function ProjectCard({
 					className='btn btn-warning btn-circle ml-4 capitalize'
 				>
 					<div className='tooltip' data-tip='Delete project'>
-						<AiOutlineDelete size={32} />
+						<AiOutlineDelete size={iconSize} />
 					</div>
 				</button>
 			</div>

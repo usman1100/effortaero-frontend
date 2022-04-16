@@ -3,7 +3,7 @@ import ProjectServiec from '../../api/project.service'
 
 const useGetCreatedProjects = () => {
 	const projectsAPI = new ProjectServiec()
-	return useQuery(['projected', 'created'], () =>
+	return useQuery(['projects', 'created'], () =>
 		projectsAPI.createdProjects()
 	)
 }
