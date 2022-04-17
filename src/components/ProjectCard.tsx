@@ -1,8 +1,10 @@
+import toast from 'react-hot-toast'
 import { AiOutlineDelete, AiOutlineInfoCircle } from 'react-icons/ai'
+import useDeleteProject from '../lib/hooks/projects/useDeleteProject'
 import { formatDate } from '../utils/datetime'
 
 interface Props {
-	id: string
+	_id: string
 	name: string
 	actors: any[]
 	useCases: any[]
@@ -11,7 +13,7 @@ interface Props {
 }
 
 export default function ProjectCard({
-	id,
+	_id,
 	name,
 	actors,
 	organization,
@@ -20,9 +22,20 @@ export default function ProjectCard({
 }: Props) {
 	const iconSize = 26
 
+	const { mutate: deleteProject } = useDeleteProject(_id)
+
+	const handleDelete = () => {
+		const proName = prompt(
+			`Enter project name to confirm deletion: ${name}`
+		)
+
+		if (proName === name) deleteProject()
+		else toast.error('Project name does not match')
+	}
+
 	return (
 		<div className='flex my-5'>
-			<div className='card w-96 bg-base-100 shadow-xl' id={id}>
+			<div className='card w-96 bg-base-100 shadow-xl'>
 				<div className='card-body'>
 					<h2 className='card-title'>{name}</h2>
 					<p>Created At: {formatDate(createdAt)}</p>
@@ -51,9 +64,14 @@ export default function ProjectCard({
 					type='button'
 					className='btn btn-warning btn-circle ml-4 capitalize'
 				>
-					<div className='tooltip' data-tip='Delete project'>
+					<button
+						type='button'
+						onClick={handleDelete}
+						className='tooltip'
+						data-tip='Delete project'
+					>
 						<AiOutlineDelete size={iconSize} />
-					</div>
+					</button>
 				</button>
 			</div>
 		</div>

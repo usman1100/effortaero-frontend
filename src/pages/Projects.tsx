@@ -18,8 +18,8 @@ export default function Projects() {
 			</div>
 
 			{!isLoading &&
-				data?.data?.data?.map((pro: any, i: number) => (
-					<ProjectCard {...pro} id={i} />
+				data?.data?.data?.map((pro: any) => (
+					<ProjectCard key={pro._id} {...pro} />
 					// <pre>{JSON.stringify(pro, null, 4)}</pre>
 				))}
 		</div>

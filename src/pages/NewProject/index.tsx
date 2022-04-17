@@ -1,9 +1,11 @@
 import { useFormik } from 'formik'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import toast from 'react-hot-toast'
 import AttributeCard from './AttributeCard'
 import useCreatedOrgs from '../../lib/hooks/organizations/useCreatedOrgs'
 import ActorInputForm from './AttributeInputForm'
+import useCreateProject from '../../lib/hooks/projects/useCreateProject'
 
 export interface Actor {
 	name: string
@@ -18,20 +20,35 @@ export interface UseCase {
 }
 
 export default function NewProject() {
+	const [actors, setActors] = useState<Actor[]>([])
+	const [useCases, setUseCases] = useState<UseCase[]>([])
+
 	const formik = useFormik({
 		initialValues: {
 			name: '',
 			organization: '',
 		},
 		onSubmit: values => {
-			console.log({
-				...values,
-			})
+			if (!values.name) {
+				toast.error('Project name is required')
+				return
+			}
+
+			if (!values.organization) {
+				toast.error('Organization is required')
+				return
+			}
+
+			mutate()
 		},
 	})
 
-	const [actors, setActors] = useState<Actor[]>([])
-	const [useCases, setUseCases] = useState<UseCase[]>([])
+	const { mutate } = useCreateProject({
+		name: formik.values.name,
+		orgID: formik.values.organization,
+		useCases,
+		actors,
+	})
 
 	const [displayAttrForm, setDisplayAttrForm] = useState({
 		actor: false,
@@ -60,24 +77,26 @@ export default function NewProject() {
 					name='name'
 					type='text'
 					placeholder='i.e Facebook, Google, etc'
+					value={formik.values.name}
 					onChange={formik.handleChange}
 				/>
 
 				<p className='font-bold mt-5'>Select Organization</p>
 				<select
-					name='org'
-					id='org'
+					name='organization'
+					id='organization'
 					value={formik.values.organization}
 					onChange={formik.handleChange}
 					className='select select-secondary'
 				>
 					<option value=''>Select Organization</option>
 					{orgs?.data?.data?.map((item: any) => (
-						<option key={item?.org.id} value={item?.org.id}>
+						<option key={item?.org.id} value={item?.org._id}>
 							{item?.org.name}
 						</option>
 					))}
 				</select>
+				{/* ------------------------------------------------------------------------ */}
 
 				<div className='mb-3'>
 					<div className='grid grid-flow-col mt-5'>
@@ -155,6 +174,8 @@ export default function NewProject() {
 						))}
 					</div>
 				</div>
+
+				{/* ------------------------------------------------------------------------ */}
 
 				<button type='submit' className='btn btn-outline'>
 					Create Project
