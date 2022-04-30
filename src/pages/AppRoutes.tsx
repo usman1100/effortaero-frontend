@@ -6,6 +6,7 @@ import Dashboard from './Dashboard'
 import Members from './Members'
 import NewProject from './NewProject'
 import Organization from './Organizations'
+import ProjectInfo from './ProjectInfo'
 import Projects from './Projects'
 import Settings from './Settings'
 
@@ -29,6 +30,10 @@ export default function AppRoutes() {
 					<Route
 						path='/dashboard/projects/new'
 						element={<NewProject />}
+					/>
+					<Route
+						path='/dashboard/projects/:id'
+						element={<ProjectInfo />}
 					/>
 
 					<Route path='/dashboard/members' element={<Members />} />

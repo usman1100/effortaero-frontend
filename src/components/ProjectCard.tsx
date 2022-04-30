@@ -1,5 +1,6 @@
 import toast from 'react-hot-toast'
 import { AiOutlineDelete, AiOutlineInfoCircle } from 'react-icons/ai'
+import { Link } from 'react-router-dom'
 import useDeleteProject from '../lib/hooks/projects/useDeleteProject'
 import { formatDate } from '../utils/datetime'
 
@@ -56,7 +57,9 @@ export default function ProjectCard({
 					className='btn btn-info btn-circle ml-4 capitalize'
 				>
 					<div className='tooltip' data-tip='More info'>
-						<AiOutlineInfoCircle size={iconSize} />
+						<Link to={`/dashboard/projects/${_id}`}>
+							<AiOutlineInfoCircle size={iconSize} />
+						</Link>
 					</div>
 				</button>
 
