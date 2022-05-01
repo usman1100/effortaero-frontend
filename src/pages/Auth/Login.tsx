@@ -1,47 +1,29 @@
-import { useState } from 'react'
-import toast from 'react-hot-toast'
-import { useQuery } from 'react-query'
-import { LoginDetails } from '../../lib/api'
-import AuthService from '../../lib/api/auth'
+import { useFormik } from 'formik'
+import useLogin from '../../lib/hooks/auth/useLogin'
 
 interface LoginPageProps {
 	setAuthPage: Function
 }
 
 function Login({ setAuthPage }: LoginPageProps) {
-	const authAPI = new AuthService()
-	const [loginInfo, setLoginInfo] = useState<LoginDetails>({
-		email: '',
-		password: '',
+	const formik = useFormik({
+		initialValues: {
+			email: '',
+			password: '',
+		},
+		onSubmit: () => {
+			mutate()
+		},
 	})
 
-	const { refetch, isLoading, isFetching } = useQuery(
-		'login',
-		() => authAPI.login(loginInfo),
-		{
-			enabled: false,
-			refetchInterval: Infinity,
-			retry: false,
-			onError: (err: any) => {
-				toast.error(err.response.data.message)
-			},
-			onSuccess: (data: any) => {
-				localStorage.setItem('token', data.token)
-				toast.success('Login Successful')
-			},
-		}
-	)
-
+	const { isLoading, mutate } = useLogin(formik.values)
 	return (
 		<>
 			<h1 className='font-bold text-3xl mb-5'>Sign In</h1>
 
 			<form
 				className='form-control flex w-2/3 mx-auto'
-				onSubmit={e => {
-					e.preventDefault()
-					refetch()
-				}}
+				onSubmit={formik.handleSubmit}
 			>
 				<input
 					className='input input-bordered input-success'
@@ -49,10 +31,8 @@ function Login({ setAuthPage }: LoginPageProps) {
 					type='email'
 					name='email'
 					autoComplete='email'
-					value={loginInfo.email}
-					onChange={e =>
-						setLoginInfo({ ...loginInfo, email: e.target.value })
-					}
+					value={formik.values.email}
+					onChange={formik.handleChange}
 				/>
 
 				<input
@@ -61,10 +41,8 @@ function Login({ setAuthPage }: LoginPageProps) {
 					type='password'
 					name='password'
 					autoComplete='current-password'
-					value={loginInfo.password}
-					onChange={e =>
-						setLoginInfo({ ...loginInfo, password: e.target.value })
-					}
+					value={formik.values.password}
+					onChange={formik.handleChange}
 				/>
 
 				<div className='flex'>
@@ -85,9 +63,7 @@ function Login({ setAuthPage }: LoginPageProps) {
 				<button
 					type='submit'
 					className={`w-1/2 mx-auto btn ${
-						isLoading || isFetching
-							? 'loading disabled'
-							: 'btn-primary'
+						isLoading ? 'loading disabled' : 'btn-primary'
 					} capitalize`}
 				>
 					Login
