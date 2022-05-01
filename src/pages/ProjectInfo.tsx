@@ -22,15 +22,21 @@ export default function ProjectInfo() {
 			</h1>
 			<hr className='my-4' />
 
-			<h1 className='text-3xl mb-6'>Project Attributes</h1>
+			<h1 className='text-3xl mb-6 font-bold'>Organization</h1>
+			<h1 className='text-2xl mb-6 '>
+				{data?.data?.data?.organization?.name}
+			</h1>
+			<hr className='mb-5' />
 
-			<h1 className='text-2xl mb-3 font-bold'>Actors</h1>
+			<h1 className='text-3xl mb-6 font-bold'>Project Attributes</h1>
 
-			<div className='overflow-x-auto'>
-				<table className='table table-zebra w-full'>
+			<h1 className='text-2xl mb-3'>Actors</h1>
+
+			<div className='overflow-x-auto mb-10'>
+				<table className='table w-full'>
 					<thead>
 						<tr>
-							<th />
+							<th> </th>
 							<th>Name</th>
 							<th>Complexity</th>
 							<th>Description</th>
@@ -53,13 +59,13 @@ export default function ProjectInfo() {
 				</table>
 			</div>
 
-			<h1 className='text-2xl mb-3 font-bold'>Use Cases</h1>
+			<h1 className='text-2xl mb-3'>Use Cases</h1>
 
 			<div className='overflow-x-auto'>
-				<table className='table table-zebra w-full'>
+				<table className='table w-full'>
 					<thead>
 						<tr>
-							<th />
+							<th> </th>
 							<th>Name</th>
 							<th>Complexity</th>
 							<th>Description</th>

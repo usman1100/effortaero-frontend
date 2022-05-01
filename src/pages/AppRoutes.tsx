@@ -3,8 +3,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import NotFound from './404'
 import Auth from './Auth'
 import Dashboard from './Dashboard'
-import Members from './Members'
 import NewProject from './NewProject'
+import OrganizationPage from './OrganizationPage'
 import Organization from './Organizations'
 import ProjectInfo from './ProjectInfo'
 import Projects from './Projects'
@@ -22,8 +22,8 @@ export default function AppRoutes() {
 					/>
 
 					<Route
-						path='/dashboard/organization/:orgId'
-						element={<>hello</>}
+						path='/dashboard/organization/:id'
+						element={<OrganizationPage />}
 					/>
 
 					<Route path='/dashboard/projects' element={<Projects />} />
@@ -35,8 +35,6 @@ export default function AppRoutes() {
 						path='/dashboard/projects/:id'
 						element={<ProjectInfo />}
 					/>
-
-					<Route path='/dashboard/members' element={<Members />} />
 
 					<Route
 						path='/dashboard/projects/:id'

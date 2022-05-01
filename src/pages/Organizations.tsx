@@ -27,6 +27,7 @@ export default function Organization() {
 						<>
 							{data.data.data.map((item: OrgInfo) => (
 								<OrganizationItem
+									id={item.org._id}
 									members={item.members.length}
 									key={item.org.name}
 									name={item.org.name}

@@ -19,10 +19,6 @@ const items = [
 		icon: <AiFillProject className='mr-2' size={iconSize} />,
 	},
 	{
-		url: 'Members',
-		icon: <MdPeopleOutline className='mr-2' size={iconSize} />,
-	},
-	{
 		url: 'setting',
 		icon: <AiFillSetting className='mr-2' size={iconSize} />,
 	},
