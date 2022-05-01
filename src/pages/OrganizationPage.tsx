@@ -1,22 +1,52 @@
 import { useParams } from 'react-router-dom'
+import MemberCard from '../components/MemberCard'
 import useGetOrgInfo from '../lib/hooks/organizations/useGetOrgInfo'
+import { formatDate } from '../utils/datetime'
 
 export default function OrganizationPage() {
 	const { id } = useParams()
 
 	const { data, isLoading } = useGetOrgInfo(id as string)
 	const org = data?.data?.data?.org
-	const members = data?.data?.data?.members
+	const members: any[] = data?.data?.data?.members
+
 	return (
-		<div>
-			<h1 className='text-5xl'>Organization Info</h1>
+		<div className='p-5'>
+			<button
+				className='btn btn-secondary'
+				type='button'
+				onClick={() => {
+					window.history.back()
+				}}
+			>
+				Back
+			</button>
 			{isLoading ? (
 				<h1>Loading</h1>
 			) : (
 				<>
-					{/* <h1>{data?.data.data.name}</h1> */}
-					<pre>{JSON.stringify(org, null, 4)}</pre>
-					<pre>{JSON.stringify(members, null, 4)}</pre>
+					<h1 className='font-bold text-5xl mt-5'>{org?.name}</h1>
+
+					<h1 className='my-5'>
+						Date of creation:{' '}
+						<p className='font-bold'>{formatDate(org.createdAt)}</p>
+					</h1>
+
+					<h1 className='font-bold'>
+						{members.length === 0 ? 'No Members' : 'Members'}
+					</h1>
+
+					<div className='grid grid-cols-2'>
+						{members.map(e => (
+							<>
+								<MemberCard {...e} />
+								<MemberCard {...e} />
+								<MemberCard {...e} />
+								<MemberCard {...e} />
+								<MemberCard {...e} />
+							</>
+						))}
+					</div>
 				</>
 			)}
 		</div>
