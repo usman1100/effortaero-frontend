@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import OrganizationItem from '../../components/OrganizationItem'
 import useCreatedOrgs from '../../lib/hooks/organizations/useCreatedOrgs'
 import { OrgInfo } from '../../types/orgs'
@@ -14,9 +15,11 @@ export default function Listing() {
 
 	return (
 		<>
-			<button className='btn btn-primary mx-5 mt-10' type='button'>
-				Create Organization
-			</button>
+			<Link to='/dashboard/organization/create'>
+				<button className='btn btn-primary mx-5 mt-10' type='button'>
+					Create Organization
+				</button>
+			</Link>
 			{isLoading && <>Loading...</>}
 			{isSuccess && (
 				<div className='grid grid-cols-1  mt-5'>
@@ -24,6 +27,7 @@ export default function Listing() {
 						<>
 							{data.data.data.map((item: OrgInfo) => (
 								<OrganizationItem
+									slogan={item.org?.slogan}
 									id={item.org._id}
 									members={item.members.length}
 									key={item.org.name}

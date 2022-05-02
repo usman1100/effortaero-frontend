@@ -3,6 +3,7 @@ export interface OrgInfo {
 		_id: string
 		createdBy: string
 		name: string
+		slogan: string
 		createdAt: string
 	}
 	members: any[]

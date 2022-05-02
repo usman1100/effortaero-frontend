@@ -5,7 +5,7 @@ export default class OrgService extends BaseService {
 
 	my = () => this.get(`${this.prefix}/my`)
 
-	create = (name: string) => this.post(`${this.prefix}/create`, { name })
+	create = (info: any) => this.post(`${this.prefix}/create`, info)
 
 	createdOrgs = () => this.get(`${this.prefix}/created-orgs`)
 

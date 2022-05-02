@@ -4,6 +4,7 @@ import { formatDate } from '../utils/datetime'
 
 interface props {
 	name: string
+	slogan?: string
 	createdAt: string
 	members: number
 	id: string
@@ -11,6 +12,7 @@ interface props {
 
 export default function OrganizationItem({
 	name,
+	slogan,
 	createdAt,
 	members,
 	id,
@@ -19,6 +21,9 @@ export default function OrganizationItem({
 		<div className='card  bg-base-100 shadow-xl mx-5 my-2'>
 			<div className='card-body'>
 				<h2 className='font-bold text-2xl'>{name}</h2>
+
+				{slogan && <i className=''>{slogan}</i>}
+
 				<p>Created on {formatDate(createdAt) || 'datetime error'}</p>
 
 				<div className='grid grid-flow-col items-center mr-auto gap-3'>

@@ -4,6 +4,7 @@ import NotFound from './404'
 import Auth from './Auth'
 import Dashboard from './Dashboard'
 import NewProject from './NewProject'
+import Create from './Organization/Create'
 import Info from './Organization/Info'
 import Listing from './Organization/Listing'
 import ProjectInfo from './ProjectInfo'
@@ -24,6 +25,11 @@ export default function AppRoutes() {
 					<Route
 						path='/dashboard/organization/:id'
 						element={<Info />}
+					/>
+
+					<Route
+						path='/dashboard/organization/create'
+						element={<Create />}
 					/>
 
 					<Route path='/dashboard/projects' element={<Projects />} />
