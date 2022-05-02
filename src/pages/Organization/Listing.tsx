@@ -1,15 +1,9 @@
-import { useState } from 'react'
-import OrganizationItem from '../components/OrganizationItem'
-import useCreatedOrgs from '../lib/hooks/organizations/useCreatedOrgs'
-import { OrgInfo } from '../types/orgs'
-import CreateOrg from './CreateOrg'
+import OrganizationItem from '../../components/OrganizationItem'
+import useCreatedOrgs from '../../lib/hooks/organizations/useCreatedOrgs'
+import { OrgInfo } from '../../types/orgs'
 
-export default function Organization() {
+export default function Listing() {
 	const { data, error, isError, isLoading, isSuccess } = useCreatedOrgs()
-
-	const [display, setDisplay] = useState(false)
-
-	if (isError && error?.response?.data?.statusCode) return <>Unauthorized</>
 
 	if (isError)
 		return (
@@ -20,9 +14,12 @@ export default function Organization() {
 
 	return (
 		<>
+			<button className='btn btn-primary mx-5 mt-10' type='button'>
+				Create Organization
+			</button>
 			{isLoading && <>Loading...</>}
 			{isSuccess && (
-				<div className='grid grid-cols-1  mt-10'>
+				<div className='grid grid-cols-1  mt-5'>
 					{data?.data?.data?.length ? (
 						<>
 							{data.data.data.map((item: OrgInfo) => (
@@ -40,15 +37,6 @@ export default function Organization() {
 					)}
 				</div>
 			)}
-			<button
-				className='btn btn-primary m-5'
-				onClick={() => setDisplay(prev => !prev)}
-				type='button'
-			>
-				Create Organization
-			</button>
-
-			{display && <CreateOrg />}
 		</>
 	)
 }

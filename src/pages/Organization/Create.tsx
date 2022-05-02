@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
-import useCreateNewOrg from '../lib/hooks/organizations/useCreateNewOrg'
+import useCreateNewOrg from '../../lib/hooks/organizations/useCreateNewOrg'
 
-export default function CreateOrg() {
+export default function Create() {
 	const formik = useFormik({
 		initialValues: {
 			name: '',

@@ -4,8 +4,8 @@ import NotFound from './404'
 import Auth from './Auth'
 import Dashboard from './Dashboard'
 import NewProject from './NewProject'
-import OrganizationPage from './OrganizationPage'
-import Organization from './Organizations'
+import Info from './Organization/Info'
+import Listing from './Organization/Listing'
 import ProjectInfo from './ProjectInfo'
 import Projects from './Projects'
 import Settings from './Settings'
@@ -18,12 +18,12 @@ export default function AppRoutes() {
 				<Route path='/dashboard' element={<Dashboard />}>
 					<Route
 						path='/dashboard/organization'
-						element={<Organization />}
+						element={<Listing />}
 					/>
 
 					<Route
 						path='/dashboard/organization/:id'
-						element={<OrganizationPage />}
+						element={<Info />}
 					/>
 
 					<Route path='/dashboard/projects' element={<Projects />} />

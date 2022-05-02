@@ -1,9 +1,9 @@
 import { useParams } from 'react-router-dom'
-import MemberCard from '../components/MemberCard'
-import useGetOrgInfo from '../lib/hooks/organizations/useGetOrgInfo'
-import { formatDate } from '../utils/datetime'
+import MemberCard from '../../components/MemberCard'
+import useGetOrgInfo from '../../lib/hooks/organizations/useGetOrgInfo'
+import { formatDate } from '../../utils/datetime'
 
-export default function OrganizationPage() {
+export default function Info() {
 	const { id } = useParams()
 
 	const { data, isLoading } = useGetOrgInfo(id as string)
