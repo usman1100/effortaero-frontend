@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
-import ProjectCard from '../components/ProjectCard'
-import useGetCreatedProjects from '../lib/hooks/projects/useGetCreatedProjects'
+import ProjectCard from '../../components/ProjectCard'
+import useGetCreatedProjects from '../../lib/hooks/projects/useGetCreatedProjects'
 
-export default function Projects() {
+export default function Listing() {
 	const { data, isLoading } = useGetCreatedProjects()
 
 	return (

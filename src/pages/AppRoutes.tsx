@@ -7,8 +7,9 @@ import NewProject from './NewProject'
 import Create from './Organization/Create'
 import Info from './Organization/Info'
 import Listing from './Organization/Listing'
-import ProjectInfo from './ProjectInfo'
-import Projects from './Projects'
+import Estimate from './Project/Estimate'
+import ProjectInfo from './Project/Info'
+import ProjectListing from './Project/Listing'
 import Settings from './Settings'
 
 export default function AppRoutes() {
@@ -28,11 +29,19 @@ export default function AppRoutes() {
 					/>
 
 					<Route
+						path='/dashboard/organization/:id/estimates'
+						element={<Estimate />}
+					/>
+
+					<Route
 						path='/dashboard/organization/create'
 						element={<Create />}
 					/>
 
-					<Route path='/dashboard/projects' element={<Projects />} />
+					<Route
+						path='/dashboard/projects'
+						element={<ProjectListing />}
+					/>
 					<Route
 						path='/dashboard/projects/new'
 						element={<NewProject />}

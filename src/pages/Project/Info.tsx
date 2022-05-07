@@ -1,9 +1,9 @@
 import toast from 'react-hot-toast'
 import { Link, useParams } from 'react-router-dom'
-import useGetProjectDetails from '../lib/hooks/projects/useGetProjectDetails'
-import { Attribute } from '../types/project'
+import useGetProjectDetails from '../../lib/hooks/projects/useGetProjectDetails'
+import { Attribute } from '../../types/project'
 
-export default function ProjectInfo() {
+export default function Info() {
 	const { id } = useParams()
 	const { data, error, isLoading, isError } = useGetProjectDetails(
 		id as string
@@ -148,9 +148,11 @@ export default function ProjectInfo() {
 				</div>
 			)}
 
-			<button type='button' className='btn btn-secondary'>
-				Calculate Estimates
-			</button>
+			<Link to={`/dashboard/organization/${id}/estimates`}>
+				<button type='button' className='btn btn-secondary'>
+					Calculate Estimates
+				</button>
+			</Link>
 		</div>
 	)
 }
