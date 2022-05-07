@@ -1,4 +1,5 @@
 import { useFormik } from 'formik'
+import { Link } from 'react-router-dom'
 import useCreateNewOrg from '../../lib/hooks/organizations/useCreateNewOrg'
 
 export default function Create() {
@@ -16,6 +17,11 @@ export default function Create() {
 
 	return (
 		<div className='p-5'>
+			<Link to='/dashboard/organization'>
+				<button className='btn btn-secondary mt-3' type='button'>
+					Back
+				</button>
+			</Link>
 			<h1 className='text-4xl my-5'>Create An Organization</h1>
 			<form
 				onSubmit={formik.handleSubmit}
