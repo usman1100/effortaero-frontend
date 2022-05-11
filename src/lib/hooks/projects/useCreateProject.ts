@@ -9,6 +9,8 @@ export interface projectInfo {
 	orgID: string
 	actors: Actor[]
 	useCases: UseCase[]
+	environmentalFactors: object
+	technicalFactors: object
 }
 
 const useCreateProject = (info: projectInfo) => {
