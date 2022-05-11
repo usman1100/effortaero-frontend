@@ -1,5 +1,7 @@
 import toast from 'react-hot-toast'
+import { BsGear } from 'react-icons/bs'
 import { Link, useParams } from 'react-router-dom'
+import { IoMdHammer } from 'react-icons/io'
 import useGetProjectDetails from '../../lib/hooks/projects/useGetProjectDetails'
 import { Attribute } from '../../types/project'
 
@@ -143,14 +145,15 @@ export default function Info() {
 						</div>
 					</div>
 					<button type='button' className='ml-5 btn btn-primary'>
-						Create Use Cases
+						<IoMdHammer size={25} className='mr-2' />
+						Create Use Cases{' '}
 					</button>
 				</div>
 			)}
 
 			<Link to={`/dashboard/organization/${id}/estimates`}>
-				<button type='button' className='btn btn-secondary'>
-					Calculate Estimates
+				<button type='button' className='btn btn-primary mt-10'>
+					<BsGear size={28} className='mr-2' /> Calculate Estimates
 				</button>
 			</Link>
 		</div>

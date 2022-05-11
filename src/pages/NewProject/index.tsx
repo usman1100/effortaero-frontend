@@ -34,6 +34,16 @@ export default function NewProject() {
 				return
 			}
 
+			if (!actors.length) {
+				toast.error('At least one actor is required')
+				return
+			}
+
+			if (!useCases.length) {
+				toast.error('At least one use case is required')
+				return
+			}
+
 			if (!values.organization) {
 				toast.error('Organization is required')
 				return

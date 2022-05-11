@@ -21,6 +21,10 @@ export default function Listing() {
 				data?.data?.data?.map((pro: any) => (
 					<ProjectCard key={pro._id} {...pro} />
 				))}
+
+			{data?.data?.data?.length === 0 && (
+				<h1 className='text-3xl font-bold'>No Project Created</h1>
+			)}
 		</div>
 	)
 }
