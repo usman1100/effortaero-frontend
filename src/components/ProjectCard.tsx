@@ -29,6 +29,10 @@ export default function ProjectCard({
 		const proName = prompt(
 			`Enter project name to confirm deletion: ${name}`
 		)
+		// check if cancel is clicked
+		if (proName === null) {
+			return
+		}
 
 		if (proName === name) deleteProject()
 		else toast.error('Project name does not match')
@@ -52,24 +56,24 @@ export default function ProjectCard({
 				</div>
 			</div>
 			<div className='grid grid-cols-3 justify-center content-center'>
-				<button
-					type='button'
-					className='btn btn-info btn-circle ml-4 capitalize'
-				>
-					<div className='tooltip' data-tip='More info'>
-						<Link to={`/dashboard/projects/${_id}`}>
+				<Link to={`/dashboard/projects/${_id}`}>
+					<button
+						type='button'
+						className='btn btn-info btn-circle ml-4 capitalize'
+					>
+						<div className='tooltip' data-tip='More info'>
 							<AiOutlineInfoCircle size={iconSize} />
-						</Link>
-					</div>
-				</button>
+						</div>
+					</button>
+				</Link>
 
 				<button
 					type='button'
 					className='btn btn-warning btn-circle ml-4 capitalize'
+					onClick={handleDelete}
 				>
 					<button
 						type='button'
-						onClick={handleDelete}
 						className='tooltip'
 						data-tip='Delete project'
 					>
