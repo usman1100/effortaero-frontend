@@ -7,4 +7,6 @@ export default class UserService extends BaseService {
 	me = () => this.get(`${this.prefix}/me`)
 
 	update = (data: UpdateUserDetails) => this.put(`${this.prefix}/me`, data)
+
+	search = (params: UpdateUserDetails) => this.get(`${this.prefix}/`, params)
 }

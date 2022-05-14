@@ -12,7 +12,10 @@ export default class BaseService {
 
 	protected baseURL = 'http://localhost:3000/api'
 
-	protected get = (url: string) => axios.get(url)
+	protected get = (url: string, params?: any) =>
+		axios.get(url, {
+			params,
+		})
 
 	protected post = (url: string, data: object) => axios.post(url, data)
 

@@ -21,3 +21,5 @@ export interface UpdateUserDetails {
 	name: string
 	email: string
 }
+
+export interface SearchUsersType extends UpdateUserDetails {}

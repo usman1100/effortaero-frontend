@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom'
+import AddMember from '../../components/AddMember'
 import MemberCard from '../../components/MemberCard'
 import useGetOrgInfo from '../../lib/hooks/organizations/useGetOrgInfo'
 import { formatDate } from '../../utils/datetime'
@@ -38,15 +39,11 @@ export default function Info() {
 
 					<div className='grid grid-cols-2'>
 						{members.map(e => (
-							<>
-								<MemberCard {...e} />
-								<MemberCard {...e} />
-								<MemberCard {...e} />
-								<MemberCard {...e} />
-								<MemberCard {...e} />
-							</>
+							<MemberCard {...e} />
 						))}
 					</div>
+
+					<AddMember members={members} />
 				</>
 			)}
 		</div>

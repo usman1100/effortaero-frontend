@@ -3,7 +3,7 @@ import toast from 'react-hot-toast'
 import { BsBuilding } from 'react-icons/bs'
 import { Link, Outlet, useNavigate } from 'react-router-dom'
 import { AiFillProject, AiFillSetting } from 'react-icons/ai'
-import { MdPeopleOutline } from 'react-icons/md'
+import { IoMdPerson } from 'react-icons/io'
 import useValidate from '../lib/hooks/auth/useValidate'
 import AuthStore from '../lib/state/authStore'
 import Navbar from './Navbar'
@@ -20,7 +20,7 @@ const items = [
 	},
 	{
 		url: 'Profile',
-		icon: <AiFillSetting className='mr-2' size={iconSize} />,
+		icon: <IoMdPerson className='mr-2' size={iconSize} />,
 	},
 	{
 		url: 'setting',
