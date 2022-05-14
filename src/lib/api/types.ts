@@ -12,7 +12,7 @@ export interface RegisterDetails {
 }
 
 export interface SocialLoginDetails {
-	authProvider: 'google' | 'facebook'
+	authProvider: 'google' | 'facebook' | 'github'
 	name: string
 	email: string
 }

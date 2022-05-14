@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import GoogleLogin from 'react-google-login'
 import FacebookLogin from 'react-facebook-login'
-import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import FacebookLogo from '../../assets/images/icons/icons8-facebook.svg'
-import GoogleLogo from '../../assets/images/icons/icons8-google.svg'
-import GitHubIcon from '../../assets/images/icons/icons8-octocat.svg'
 import { SocialLoginDetails } from '../../lib/api'
 import useSocialLogin from '../../lib/hooks/auth/useSocialLogin'
 import AuthStore from '../../lib/state/authStore'
 import Login from './Login'
 import Register from './Register'
+// import LoginGithub from 'react-login-github'
+// import GithubIcon from '../../assets/images/icons/icons8-github.svg'
 
 export default function Auth() {
-	const logoSize = 30
 	const [authPage, setAuthPage] = useState('login')
 
 	const redirect = useNavigate()
@@ -58,6 +56,7 @@ export default function Auth() {
 	const googleID =
 		'286738020826-n2caknvf798tq323kppbrqneiqoj4r0s.apps.googleusercontent.com'
 	const facebookID = '366745742092139'
+	// const githubID = '27876c2757aa11d38c4f'
 
 	const { mutate } = useSocialLogin(socilInfo)
 
@@ -69,16 +68,26 @@ export default function Auth() {
 						Save some clicks, use OAuth
 					</h1>
 
-					<button type='button' className='btn bg-sky-900 w-4/5 mt-5'>
-						<img
-							alt='GitHub'
-							className='mr-5 hidden lg:block'
-							src={GitHubIcon}
-							width={logoSize}
-							height={logoSize}
-						/>
-						Continue with Github
-					</button>
+					{/* <LoginGithub
+						icon={GithubIcon}
+						clientId={githubID}
+						onSuccess={githubResponse}
+						onFailure={e => {
+							console.log({ ...e })
+						}}
+						className='btn btn-secondary w-4/5'
+					>
+						<>
+							<img
+								src={GithubIcon}
+								alt='github icon'
+								height={40}
+								width={40}
+								className='mr-3'
+							/>
+							<p>Continue with Github</p>
+						</>
+					</LoginGithub> */}
 
 					<GoogleLogin
 						clientId={googleID}
@@ -91,29 +100,23 @@ export default function Auth() {
 						Continue with Google
 					</GoogleLogin>
 
-					{/* <button
-						type='button'
-						className='btn btn-info bg-sky-400 text-slate-900 w-4/5'
-					>
-						<img
-							alt='Facebook'
-							className='mr-5 hidden lg:block'
-							src={FacebookLogo}
-							width={logoSize}
-							height={logoSize}
-						/>
-						Continue with Facebook
-					</button> */}
-
 					<FacebookLogin
 						appId={facebookID}
-						autoLoad
+						autoLoad={false}
 						fields='name,email,picture'
-						// onClick={componentClicked}
 						callback={facebookResponse}
-					>
-						Continue with Facebook
-					</FacebookLogin>
+						textButton='Continue with Facebook'
+						icon={
+							<img
+								className='mr-2'
+								src={FacebookLogo}
+								height={30}
+								width={30}
+								alt='facebook logo'
+							/>
+						}
+						cssClass='btn btn-warning w-4/5'
+					/>
 				</div>
 			</div>
 
