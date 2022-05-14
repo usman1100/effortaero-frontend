@@ -1,16 +1,17 @@
 import { Link, useParams } from 'react-router-dom'
+import useMLEstimation from '../../lib/hooks/estimation/useMLEstimation'
 import useGetProjectDetails from '../../lib/hooks/projects/useGetProjectDetails'
 
 export default function Estimate() {
 	const { id } = useParams()
-	const { data, error, isLoading, isError } = useGetProjectDetails(
-		id as string
-	)
+	const { data: project, isLoading } = useGetProjectDetails(id as string)
+
+	const { data: estimateData, refetch } = useMLEstimation(id as string)
 
 	if (
 		!isLoading &&
-		(!data?.data?.data?.actors?.length ||
-			!data?.data?.data?.useCases?.length)
+		(!project?.data?.data?.actors?.length ||
+			!project?.data?.data?.useCases?.length)
 	) {
 		return (
 			<div className='p-5'>
@@ -41,7 +42,21 @@ export default function Estimate() {
 			<h1 className='text-5xl mt-5'>Estimate</h1>
 			<hr />
 
-			<div className=''>Machine Learning</div>
+			<div className='text-3xl font-bold'>Machine Learning Estimate</div>
+
+			<button
+				className='btn btn-primary'
+				type='button'
+				onClick={() => {
+					refetch()
+				}}
+			>
+				Calculate
+			</button>
+
+			{estimateData && (
+				<pre>{JSON.stringify(estimateData?.data?.data, null, 4)}</pre>
+			)}
 		</div>
 	)
 }
