@@ -1,53 +1,39 @@
 import { useFormik } from 'formik'
 import { useState } from 'react'
-import toast from 'react-hot-toast'
-import { useQuery } from 'react-query'
-import AuthService from '../../lib/api/auth'
+import useRegister from '../../lib/hooks/auth/useRegister'
 
 interface RegisterPageProps {
 	setAuthPage: Function
 }
 
 function Register({ setAuthPage }: RegisterPageProps) {
-	const [newOrg, setNewOrg] = useState<boolean>(false)
-
-	const authAPI = new AuthService()
-
-	const { refetch } = useQuery(
-		'register',
-		() =>
-			authAPI.register({
-				...formik.values,
-				role: newOrg ? 'owner' : 'user',
-			}),
-		{
-			enabled: false,
-			refetchInterval: Infinity,
-			retry: false,
-			onError: (err: any) => {
-				toast.error(err.response.data.message)
-			},
-			onSuccess: (data: any) => {
-				localStorage.setItem('token', data.token)
-				toast.success('Registration Successful Successful')
-			},
-		}
-	)
-
 	const formik = useFormik({
 		initialValues: {
 			name: '',
 			email: '',
 			newPassword: '',
 			confirmPassword: '',
+			role: false,
 		},
 		validate,
 		onSubmit: () => {
-			refetch()
+			console.log('submitting')
+
+			mutate()
 		},
 	})
 
-	function validate({ name, newPassword, confirmPassword, orgName }: any) {
+	const { mutate } = useRegister({
+		...formik.values,
+		role: formik.values.role ? 'owner' : 'user',
+	})
+	function validate({
+		name,
+		newPassword,
+		confirmPassword,
+		orgName,
+		role,
+	}: any) {
 		const errors: any = {}
 		if (!name || name.length < 3) errors.name = 'Name is required'
 		if (!newPassword || newPassword.length < 10)
@@ -56,7 +42,6 @@ function Register({ setAuthPage }: RegisterPageProps) {
 			errors.confirmPassword = 'Confirm Password is required'
 			errors.newPassword = 'Confirm Password is required'
 		}
-		if (newOrg && !orgName) errors.orgName = 'Organization Name is required'
 		return errors
 	}
 
@@ -135,7 +120,7 @@ function Register({ setAuthPage }: RegisterPageProps) {
 					<div className='form-control'>
 						<label
 							form='register-form'
-							htmlFor='newOrg'
+							htmlFor='role'
 							className='label cursor-pointer'
 						>
 							<span className='label-text'>
@@ -144,10 +129,10 @@ function Register({ setAuthPage }: RegisterPageProps) {
 							<input
 								type='checkbox'
 								className='toggle'
-								checked={newOrg}
-								onChange={() => {
-									setNewOrg(!newOrg)
-								}}
+								id='role'
+								name='role'
+								checked={formik.values.role}
+								onChange={formik.handleChange}
 							/>
 						</label>
 					</div>
