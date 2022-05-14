@@ -16,3 +16,8 @@ export interface SocialLoginDetails {
 	name: string
 	email: string
 }
+
+export interface UpdateUserDetails {
+	name: string
+	email: string
+}

@@ -19,6 +19,10 @@ const items = [
 		icon: <AiFillProject className='mr-2' size={iconSize} />,
 	},
 	{
+		url: 'Profile',
+		icon: <AiFillSetting className='mr-2' size={iconSize} />,
+	},
+	{
 		url: 'setting',
 		icon: <AiFillSetting className='mr-2' size={iconSize} />,
 	},

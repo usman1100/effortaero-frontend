@@ -7,6 +7,7 @@ import NewProject from './NewProject'
 import Create from './Organization/Create'
 import Info from './Organization/Info'
 import Listing from './Organization/Listing'
+import Profile from './Profile'
 import Estimate from './Project/Estimate'
 import ProjectInfo from './Project/Info'
 import ProjectListing from './Project/Listing'
@@ -56,6 +57,7 @@ export default function AppRoutes() {
 						element={<>Project ID: 123</>}
 					/>
 
+					<Route path='/dashboard/profile' element={<Profile />} />
 					<Route path='/dashboard/setting' element={<Settings />} />
 				</Route>
 				<Route path='*' element={<NotFound />} />
