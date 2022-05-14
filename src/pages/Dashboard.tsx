@@ -76,7 +76,7 @@ export default function Dashboard() {
 						</Link>
 					))}
 				</div>
-				<div className=' bg-slate-50 col-span-4'>
+				<div className='col-span-4'>
 					<Outlet />
 				</div>
 			</div>

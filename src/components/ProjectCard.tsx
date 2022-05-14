@@ -72,13 +72,9 @@ export default function ProjectCard({
 					className='btn btn-warning btn-circle ml-4 capitalize'
 					onClick={handleDelete}
 				>
-					<button
-						type='button'
-						className='tooltip'
-						data-tip='Delete project'
-					>
+					<p className='tooltip' data-tip='Delete project'>
 						<AiOutlineDelete size={iconSize} />
-					</button>
+					</p>
 				</button>
 			</div>
 		</div>

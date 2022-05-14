@@ -23,10 +23,7 @@ export default function Create() {
 				</button>
 			</Link>
 			<h1 className='text-4xl my-5'>Create An Organization</h1>
-			<form
-				onSubmit={formik.handleSubmit}
-				className='bg-slate-100 p-4 rounded-lg'
-			>
+			<form onSubmit={formik.handleSubmit} className=' p-4 rounded-lg'>
 				<p className='mb-3'>Company Name</p>
 				<input
 					className='input input-bordered input-success w-1/2'

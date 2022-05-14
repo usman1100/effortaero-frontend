@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
-const getTheme = (): string => {
+export const getTheme = (): string => {
 	const theme = localStorage.getItem('theme')
 	if (theme) {
 		return theme
@@ -8,6 +8,12 @@ const getTheme = (): string => {
 
 	localStorage.setItem('theme', 'light')
 	return 'light'
+}
+
+export function switchTheme(newTheme: string) {
+	const html = document.getElementsByTagName('html')[0]
+	html.setAttribute('data-theme', newTheme)
+	localStorage.setItem('theme', newTheme)
 }
 
 export default function ThemeSwitch() {
@@ -43,19 +49,24 @@ export default function ThemeSwitch() {
 		'coffee',
 		'winter',
 	]
+	useEffect(() => {
+		switchTheme(theme)
+	}, [theme])
 
 	return (
 		<div className='my-5'>
 			<h1 className='text-xl font-bold my-2'>Select Theme</h1>
 			<select
-				className='select w-1/3'
+				className='select select-success  w-1/3'
 				onChange={event => {
 					setTheme(event.target.value)
 				}}
 			>
 				<option value={theme}>{theme.toUpperCase()}</option>
 				{themes.map(e => (
-					<option value={e}>{e.toUpperCase()}</option>
+					<option key={e} value={e}>
+						{e.toUpperCase()}
+					</option>
 				))}
 			</select>
 		</div>
