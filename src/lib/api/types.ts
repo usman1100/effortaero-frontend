@@ -10,3 +10,9 @@ export interface RegisterDetails {
 	confirmPassword: string
 	role: 'owner' | 'user'
 }
+
+export interface SocialLoginDetails {
+	authProvider: 'google' | 'facebook'
+	name: string
+	email: string
+}

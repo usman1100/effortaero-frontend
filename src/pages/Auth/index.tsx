@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import GoogleLogin from 'react-google-login'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import FacebookLogo from '../../assets/images/icons/icons8-facebook.svg'
 import GoogleLogo from '../../assets/images/icons/icons8-google.svg'
 import GitHubIcon from '../../assets/images/icons/icons8-octocat.svg'
+import { SocialLoginDetails } from '../../lib/api'
+import useSocialLogin from '../../lib/hooks/auth/useSocialLogin'
 import AuthStore from '../../lib/state/authStore'
 import Login from './Login'
 import Register from './Register'
@@ -18,6 +21,33 @@ export default function Auth() {
 	React.useEffect(() => {
 		if (isLoggedIn) redirect('/dashboard/organization')
 	}, [])
+
+	const [socilInfo, setSocialInfo] = useState<SocialLoginDetails>({
+		email: '',
+		name: '',
+		authProvider: 'google',
+	})
+
+	const responseGoogle = (e: any) => {
+		if (!e.error) {
+			setSocialInfo({
+				name: e.profileObj.name,
+				email: e.profileObj.email,
+				authProvider: 'google',
+			})
+		}
+	}
+
+	useEffect(() => {
+		if (socilInfo.email) {
+			mutate()
+		}
+	}, [socilInfo])
+
+	const clientID =
+		'286738020826-n2caknvf798tq323kppbrqneiqoj4r0s.apps.googleusercontent.com'
+
+	const { mutate } = useSocialLogin(socilInfo)
 
 	return (
 		<div className='flex'>
@@ -38,19 +68,16 @@ export default function Auth() {
 						Continue with Github
 					</button>
 
-					<button
-						type='button'
-						className='btn btn-warning bg-amber-400 text-slate-900 w-4/5 my-3'
+					<GoogleLogin
+						clientId={clientID}
+						buttonText='Login'
+						onSuccess={responseGoogle}
+						onFailure={responseGoogle}
+						cookiePolicy='single_host_origin'
+						className='btn btn-primary w-4/5 my-3'
 					>
-						<img
-							alt='Google'
-							className='mr-5 hidden lg:block'
-							src={GoogleLogo}
-							width={logoSize}
-							height={logoSize}
-						/>
 						Continue with Google
-					</button>
+					</GoogleLogin>
 
 					<button
 						type='button'
