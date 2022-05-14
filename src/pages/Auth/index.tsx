@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import GoogleLogin from 'react-google-login'
+import FacebookLogin from 'react-facebook-login'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import FacebookLogo from '../../assets/images/icons/icons8-facebook.svg'
@@ -38,14 +39,25 @@ export default function Auth() {
 		}
 	}
 
+	const facebookResponse = (e: any) => {
+		if (!e.error) {
+			setSocialInfo({
+				name: e.name,
+				email: e.email,
+				authProvider: 'facebook',
+			})
+		}
+	}
+
 	useEffect(() => {
 		if (socilInfo.email) {
 			mutate()
 		}
 	}, [socilInfo])
 
-	const clientID =
+	const googleID =
 		'286738020826-n2caknvf798tq323kppbrqneiqoj4r0s.apps.googleusercontent.com'
+	const facebookID = '366745742092139'
 
 	const { mutate } = useSocialLogin(socilInfo)
 
@@ -69,7 +81,7 @@ export default function Auth() {
 					</button>
 
 					<GoogleLogin
-						clientId={clientID}
+						clientId={googleID}
 						buttonText='Login'
 						onSuccess={responseGoogle}
 						onFailure={responseGoogle}
@@ -79,7 +91,7 @@ export default function Auth() {
 						Continue with Google
 					</GoogleLogin>
 
-					<button
+					{/* <button
 						type='button'
 						className='btn btn-info bg-sky-400 text-slate-900 w-4/5'
 					>
@@ -91,7 +103,17 @@ export default function Auth() {
 							height={logoSize}
 						/>
 						Continue with Facebook
-					</button>
+					</button> */}
+
+					<FacebookLogin
+						appId={facebookID}
+						autoLoad
+						fields='name,email,picture'
+						// onClick={componentClicked}
+						callback={facebookResponse}
+					>
+						Continue with Facebook
+					</FacebookLogin>
 				</div>
 			</div>
 
