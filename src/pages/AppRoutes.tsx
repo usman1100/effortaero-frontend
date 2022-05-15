@@ -7,6 +7,7 @@ import Dashboard from './Dashboard'
 import NewProject from './NewProject'
 import Create from './Organization/Create'
 import Info from './Organization/Info'
+import JoinedOrgs from './Organization/JoinedOrgs'
 import Listing from './Organization/Listing'
 import Profile from './Profile'
 import Estimate from './Project/Estimate'
@@ -26,11 +27,6 @@ export default function AppRoutes() {
 							<Route
 								path='/dashboard/organization'
 								element={<Listing />}
-							/>
-
-							<Route
-								path='/dashboard/organization/:id'
-								element={<Info />}
 							/>
 
 							<Route
@@ -58,9 +54,14 @@ export default function AppRoutes() {
 					) : (
 						<Route
 							path='/dashboard/organization'
-							element={<Listing />}
+							element={<JoinedOrgs />}
 						/>
 					)}
+
+					<Route
+						path='/dashboard/organization/:id'
+						element={<Info />}
+					/>
 
 					<Route path='/dashboard/profile' element={<Profile />} />
 					<Route path='/dashboard/setting' element={<Settings />} />

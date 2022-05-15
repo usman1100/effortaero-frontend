@@ -2,10 +2,13 @@ import { useParams } from 'react-router-dom'
 import AddMember from '../../components/AddMember'
 import MemberCard from '../../components/MemberCard'
 import useGetOrgInfo from '../../lib/hooks/organizations/useGetOrgInfo'
+import AuthStore from '../../lib/state/authStore'
 import { formatDate } from '../../utils/datetime'
 
 export default function Info() {
 	const { id } = useParams()
+
+	const role = AuthStore(state => state.role)
 
 	const { data, isLoading } = useGetOrgInfo(id as string)
 	const org = data?.data?.data?.org
@@ -43,7 +46,7 @@ export default function Info() {
 						))}
 					</div>
 
-					<AddMember members={members} />
+					{role === 'owner' && <AddMember members={members} />}
 				</>
 			)}
 		</div>

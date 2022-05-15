@@ -6,7 +6,7 @@ interface props {
 	name: string
 	slogan?: string
 	createdAt: string
-	members: number
+	members?: number
 	id: string
 }
 
@@ -26,12 +26,15 @@ export default function OrganizationItem({
 
 				<p>Created on {formatDate(createdAt) || 'datetime error'}</p>
 
-				<div className='grid grid-flow-col items-center mr-auto gap-3'>
-					<BsFillPeopleFill />
-					<p>
-						{members || 'No'} {members > 1 ? 'Members' : 'Member'}
-					</p>
-				</div>
+				{members && (
+					<div className='grid grid-flow-col items-center mr-auto gap-3'>
+						<BsFillPeopleFill />
+						<p>
+							{members || 'No'}{' '}
+							{members > 1 ? 'Members' : 'Member'}
+						</p>
+					</div>
+				)}
 				<div className='card-actions justify-end'>
 					<Link to={`/dashboard/organization/${id}`}>
 						<button type='button' className='btn btn-primary'>

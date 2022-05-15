@@ -30,6 +30,10 @@ const ownerItems = [
 
 const userItems = [
 	{
+		url: 'organization',
+		icon: <BsBuilding className='mr-2' size={iconSize} />,
+	},
+	{
 		url: 'Profile',
 		icon: <BsBuilding className='mr-2' size={iconSize} />,
 	},
