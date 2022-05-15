@@ -1,5 +1,7 @@
 import { useFormik } from 'formik'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import useAddMember from '../lib/hooks/organizations/useAddMember'
 import useGetOrgInfo from '../lib/hooks/organizations/useGetOrgInfo'
 import useSearchUsers from '../lib/hooks/user/useSearchUsers'
 
@@ -12,16 +14,25 @@ export default function AddMember({ members }: { members: any[] }) {
 			refetch()
 		},
 	})
+	const { id } = useParams()
+
 	const { data: users, refetch } = useSearchUsers({
 		name: formik.values.email,
 		email: formik.values.email,
 	})
 	const searchedUsers = users?.data?.data
 
-	const { id } = useParams()
-
 	const { data: orgInfo } = useGetOrgInfo(id as string)
 	const membersList = orgInfo?.data?.data?.members
+
+	const [userID, setUserID] = useState('')
+	const { mutate } = useAddMember(id as string, userID)
+
+	useEffect(() => {
+		if (userID) {
+			mutate()
+		}
+	}, [userID])
 
 	return (
 		<div className='p-3 mt-5'>
@@ -55,6 +66,9 @@ export default function AddMember({ members }: { members: any[] }) {
 								<div className='flex items-center border-2 p-2 rounded-xl my-2 w-2/5'>
 									<p>{e.email}</p>
 									<button
+										onClick={() => {
+											setUserID(e._id)
+										}}
 										type='button'
 										className='btn btn-primary ml-auto'
 									>

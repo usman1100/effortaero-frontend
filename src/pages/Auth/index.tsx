@@ -90,6 +90,7 @@ export default function Auth() {
 					</LoginGithub> */}
 
 					<GoogleLogin
+						autoLoad={false}
 						clientId={googleID}
 						buttonText='Login'
 						onSuccess={responseGoogle}
