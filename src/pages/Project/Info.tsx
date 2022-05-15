@@ -151,7 +151,7 @@ export default function Info() {
 				</div>
 			)}
 
-			<Link to={`/dashboard/organization/${id}/estimates`}>
+			<Link to={`/dashboard/projects/${id}/estimates`}>
 				<button type='button' className='btn btn-primary mt-10'>
 					<BsGear size={28} className='mr-2' /> Calculate Estimates
 				</button>

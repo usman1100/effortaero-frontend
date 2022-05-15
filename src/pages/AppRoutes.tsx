@@ -30,15 +30,14 @@ export default function AppRoutes() {
 					/>
 
 					<Route
-						path='/dashboard/organization/:id/estimates'
-						element={<Estimate />}
-					/>
-
-					<Route
 						path='/dashboard/organization/create'
 						element={<Create />}
 					/>
 
+					<Route
+						path='/dashboard/projects/:id/estimates'
+						element={<Estimate />}
+					/>
 					<Route
 						path='/dashboard/projects'
 						element={<ProjectListing />}
