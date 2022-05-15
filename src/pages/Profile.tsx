@@ -1,5 +1,6 @@
-import { Formik, useFormik } from 'formik'
-import React, { useEffect, useRef } from 'react'
+import { useFormik } from 'formik'
+import React, { useEffect } from 'react'
+import toast from 'react-hot-toast'
 import { UpdateUserDetails } from '../lib/api'
 import useMyDetails from '../lib/hooks/user/useMyDetails'
 import useUpdateMyInfo from '../lib/hooks/user/useUpdateMyInfo'
@@ -13,7 +14,15 @@ export default function Profile() {
 			name: userInfo?.name,
 			email: userInfo?.email,
 		},
-		onSubmit: values => {
+		onSubmit: () => {
+			if (
+				userInfo.email === formik.values.email &&
+				userInfo.name === formik.values.name
+			) {
+				toast.error('No changes detected')
+				return
+			}
+
 			mutate()
 		},
 	})
@@ -55,6 +64,7 @@ export default function Profile() {
 						name='email'
 						id='email'
 						className='input input-primary w-full'
+						disabled={userInfo?.authProvider}
 					/>
 				</div>
 

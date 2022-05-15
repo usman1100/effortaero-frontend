@@ -20,7 +20,9 @@ export default function useLogin(loginInfo: LoginDetails) {
 			const info = data.data.data
 			login(info.token, info.user.role)
 			toast.success('Login Successful')
-			redirect('/dashboard/organization')
+			if (info.user.role === 'owner') {
+				redirect('/dashboard/organization')
+			} else redirect('/dashboard/profile')
 		},
 	})
 }

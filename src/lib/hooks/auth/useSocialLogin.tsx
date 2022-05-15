@@ -15,7 +15,7 @@ const useSocialLogin = (info: SocialLoginDetails) => {
 			const response = data.data.data
 			login(response.token, response.user.role)
 			toast.success('Login Successful')
-			redirect('/dashboard/organization')
+			redirect('/dashboard/profile')
 		},
 	})
 }
