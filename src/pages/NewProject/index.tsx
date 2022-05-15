@@ -1,7 +1,9 @@
 import { useFormik } from 'formik'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { Link } from 'react-router-dom'
 import toast from 'react-hot-toast'
+import { VscJson } from 'react-icons/vsc'
+import { useDropzone } from 'react-dropzone'
 import AttributeCard from './AttributeCard'
 import useCreatedOrgs from '../../lib/hooks/organizations/useCreatedOrgs'
 import ActorInputForm from './AttributeInputForm'
@@ -24,6 +26,62 @@ interface TF {
 	value: string
 }
 
+interface MyDropzoneProps {
+	setActors: Function
+	setUseCases: Function
+}
+function MyDropzone({ setActors, setUseCases }: MyDropzoneProps) {
+	const onDrop = useCallback(acceptedFiles => {
+		const file: File = acceptedFiles[0]
+
+		const reader = new FileReader()
+		reader.onload = () => {
+			const text = reader.result
+			const obj = JSON.parse(text as string)
+
+			if (!obj?.actors) {
+				toast.error('File does not contain actors')
+				return
+			}
+
+			if (!obj?.useCases) {
+				toast.error('File does not contain use cases')
+				return
+			}
+
+			setActors((prev: any) => [...prev, ...obj.actors])
+			setUseCases((prev: any) => [...prev, ...obj.useCases])
+
+			toast.success('Uploaded file')
+		}
+		reader.readAsText(file)
+	}, [])
+	const { getRootProps, getInputProps, isDragActive } = useDropzone({
+		onDrop,
+		accept: {
+			'application/json': [],
+		},
+	})
+
+	return (
+		<div {...getRootProps()}>
+			<input {...getInputProps()} />
+			{isDragActive ? (
+				<div className='flex items-center cursor-pointer'>
+					<VscJson size={30} className='mr-5' />
+					<p>Drop JSON here</p>
+				</div>
+			) : (
+				<div className='flex items-center cursor-pointer'>
+					<VscJson size={30} className='mr-5' />
+					<p>
+						Drag and drop some files here, or click to select files
+					</p>
+				</div>
+			)}
+		</div>
+	)
+}
 export default function NewProject() {
 	const [actors, setActors] = useState<Actor[]>([])
 	const [useCases, setUseCases] = useState<UseCase[]>([])
@@ -211,6 +269,15 @@ export default function NewProject() {
 								deleteActor={setUseCases}
 							/>
 						))}
+					</div>
+				</div>
+
+				<div className='w-full h-32 grid items-center justify-center border-2 border-slate-300 mb-5 rounded-lg'>
+					<div className='flex items-center'>
+						<MyDropzone
+							setActors={setActors}
+							setUseCases={setUseCases}
+						/>
 					</div>
 				</div>
 

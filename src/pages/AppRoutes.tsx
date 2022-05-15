@@ -38,10 +38,7 @@ export default function AppRoutes() {
 								path='/dashboard/projects/:id/estimates'
 								element={<Estimate />}
 							/>
-							<Route
-								path='/dashboard/projects'
-								element={<ProjectListing />}
-							/>
+
 							<Route
 								path='/dashboard/projects/new'
 								element={<NewProject />}
@@ -57,7 +54,10 @@ export default function AppRoutes() {
 							element={<JoinedOrgs />}
 						/>
 					)}
-
+					<Route
+						path='/dashboard/projects'
+						element={<ProjectListing />}
+					/>
 					<Route
 						path='/dashboard/organization/:id'
 						element={<Info />}
