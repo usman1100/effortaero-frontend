@@ -1,36 +1,7 @@
 import { Link, useParams } from 'react-router-dom'
-import useMLEstimation from '../../lib/hooks/estimation/useMLEstimation'
-import useGetProjectDetails from '../../lib/hooks/projects/useGetProjectDetails'
 
 export default function Estimate() {
 	const { id } = useParams()
-	const { data: project, isLoading } = useGetProjectDetails(id as string)
-
-	const { data: estimateData, refetch } = useMLEstimation(id as string)
-
-	if (
-		!isLoading &&
-		(!project?.data?.data?.actors?.length ||
-			!project?.data?.data?.useCases?.length)
-	) {
-		return (
-			<div className='p-5'>
-				<h1 className='text-6xl mt-10'>
-					No Use Cases or Actors were found
-				</h1>
-				<p className='my-5'>
-					Please create atleast one use case and actor to create an
-					estimate
-				</p>
-
-				<Link to={`/dashboard/projects/${id}`}>
-					<button className='btn btn-secondary' type='button'>
-						Back
-					</button>
-				</Link>
-			</div>
-		)
-	}
 
 	return (
 		<div className='p-5'>
@@ -42,21 +13,28 @@ export default function Estimate() {
 			<h1 className='text-5xl mt-5'>Estimate</h1>
 			<hr />
 
-			<div className='text-3xl font-bold'>Machine Learning Estimate</div>
+			<div className='my-5 grid grid-cols-1 gap-5'>
+				<Link to={`/dashboard/projects/${id}/ml`}>
+					<div className='estimation-card bg-yellow-200'>
+						<p className='text-2xl font-bold'>Machine Learning</p>
+						<p>Use our custom trained machine learning engine </p>
+					</div>
+				</Link>
 
-			<button
-				className='btn btn-primary'
-				type='button'
-				onClick={() => {
-					refetch()
-				}}
-			>
-				Calculate
-			</button>
+				<Link to={`/dashboard/projects/${id}/ucp`}>
+					<div className='estimation-card bg-teal-200'>
+						<p className='text-2xl font-bold'>UCP Calculation</p>
+						<p>Use our custom trained machine learning engine </p>
+					</div>
+				</Link>
 
-			{estimateData && (
-				<pre>{JSON.stringify(estimateData?.data?.data, null, 4)}</pre>
-			)}
+				<Link to={`/dashboard/projects/${id}/delphi`}>
+					<div className='estimation-card bg-fuchsia-200'>
+						<p className='text-2xl font-bold'>Delphi Method</p>
+						<p>Use our custom trained machine learning engine </p>
+					</div>
+				</Link>
+			</div>
 		</div>
 	)
 }

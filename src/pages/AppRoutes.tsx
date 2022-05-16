@@ -4,6 +4,7 @@ import AuthStore from '../lib/state/authStore'
 import NotFound from './404'
 import Auth from './Auth'
 import Dashboard from './Dashboard'
+import MachineLearning from './MachineLearning'
 import NewProject from './NewProject'
 import Create from './Organization/Create'
 import Info from './Organization/Info'
@@ -42,6 +43,10 @@ export default function AppRoutes() {
 							<Route
 								path='/dashboard/projects/new'
 								element={<NewProject />}
+							/>
+							<Route
+								path='/dashboard/projects/:id/ml'
+								element={<MachineLearning />}
 							/>
 							<Route
 								path='/dashboard/projects/:id'

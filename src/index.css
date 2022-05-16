@@ -9,3 +9,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.estimation-card {
+    @apply grid grid-flow-row text-center text-slate-900 h-32 justify-center content-center rounded-2xl cursor-pointer w-2/3 hover:border-2
+}

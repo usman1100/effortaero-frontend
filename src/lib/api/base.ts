@@ -17,7 +17,7 @@ export default class BaseService {
 			params,
 		})
 
-	protected post = (url: string, data: object) => axios.post(url, data)
+	protected post = (url: string, data?: object) => axios.post(url, data)
 
 	protected put = (url: string, data: object) => axios.put(url, data)
 

@@ -14,9 +14,9 @@ export default function useCreateNewOrg(info: {
 	return useMutation(() => orgAPI.create(info), {
 		retry: false,
 
-		onSuccess: () => {
+		onSuccess: async () => {
 			toast.success('Created new organization')
-			queryClient.invalidateQueries(['orgs', 'created'])
+			await queryClient.invalidateQueries(['orgs', 'created'])
 			redirect('/dashboard/organization')
 		},
 		onError: (error: any) => {
