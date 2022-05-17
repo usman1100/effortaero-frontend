@@ -7,4 +7,6 @@ export default class EstimationService extends BaseService {
 
 	getEstimations = (id: string, estType: string) =>
 		this.get(`${this.prefix}/${id}/${estType}`)
+
+	deleteOne = (id: string) => this.delete(`${this.prefix}/${id}`)
 }

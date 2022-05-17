@@ -1,13 +1,20 @@
 import { AiOutlineDelete } from 'react-icons/ai'
 import { useParams } from 'react-router-dom'
+import useDeleteEstimation from '../lib/hooks/estimation/useDeleteEstimation'
 import useMLEstimation from '../lib/hooks/estimation/useMLEstimation'
 import useProjectEstimations from '../lib/hooks/estimation/useProjectEstimations'
 import { formatDate, formatTime } from '../utils/datetime'
 
 function EstimationCard({ data }: { data: any }) {
+	const { id: projectID } = useParams()
+	const { mutate } = useDeleteEstimation(data._id, projectID as string)
+
 	return (
 		<div className='border-2 border-primary rounded-xl m-5 p-5'>
 			<button
+				onClick={() => {
+					mutate()
+				}}
 				type='button'
 				className='ml-auto btn btn-warning btn-circle'
 			>
