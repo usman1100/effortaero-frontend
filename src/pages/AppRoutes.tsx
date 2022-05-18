@@ -4,6 +4,7 @@ import AuthStore from '../lib/state/authStore'
 import NotFound from './404'
 import Auth from './Auth'
 import Dashboard from './Dashboard'
+import Delhpi from './Delphi'
 import MachineLearning from './MachineLearning'
 import NewProject from './NewProject'
 import Create from './Organization/Create'
@@ -47,6 +48,10 @@ export default function AppRoutes() {
 							<Route
 								path='/dashboard/projects/:id/ml'
 								element={<MachineLearning />}
+							/>
+							<Route
+								path='/dashboard/projects/:id/delphi'
+								element={<Delhpi />}
 							/>
 							<Route
 								path='/dashboard/projects/:id'

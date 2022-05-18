@@ -42,6 +42,16 @@ export default function MachineLearning() {
 
 	return (
 		<div className='p-5'>
+			<button
+				className='btn btn-secondary'
+				type='button'
+				onClick={() => {
+					window.history.back()
+				}}
+			>
+				Back
+			</button>
+
 			<h1 className='text-5xl mb-5'>Machine Learning</h1>
 
 			<h1 className='text-2xl '>Your Estimations</h1>
