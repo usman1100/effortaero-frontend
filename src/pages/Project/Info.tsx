@@ -2,10 +2,107 @@ import toast from 'react-hot-toast'
 import { BsGear } from 'react-icons/bs'
 import { Link, useParams } from 'react-router-dom'
 import { IoMdHammer } from 'react-icons/io'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { useDropzone } from 'react-dropzone'
 import useGetProjectDetails from '../../lib/hooks/projects/useGetProjectDetails'
 import { Attribute } from '../../types/project'
+import { slugify } from '../../utils/misc'
+import { Actor } from '../NewProject'
+import useUpdateProject from '../../lib/hooks/projects/useUpdateProject'
+
+function UploadAttributes() {
+	const [actors, setActors] = useState<Actor[]>([])
+	const [useCases, setUseCases] = useState<Actor[]>([])
+
+	const { id } = useParams()
+
+	const { mutate } = useUpdateProject(id as string, {
+		actors,
+		useCases,
+	})
+
+	const onDrop = useCallback(acceptedFiles => {
+		const file: File = acceptedFiles[0]
+
+		const reader = new FileReader()
+		reader.onload = () => {
+			const text = reader.result
+			const obj = JSON.parse(text as string)
+
+			if (!obj?.actors) {
+				toast.error('File does not contain actors')
+				return
+			}
+
+			if (!obj?.useCases) {
+				toast.error('File does not contain use cases')
+				return
+			}
+
+			setActors((prev: any) => [...prev, ...obj.actors])
+			setUseCases((prev: any) => [...prev, ...obj.useCases])
+
+			toast.success('Uploaded file')
+		}
+		reader.readAsText(file)
+	}, [])
+	const { getRootProps, getInputProps, isDragActive } = useDropzone({
+		onDrop,
+		accept: {
+			'application/json': [],
+		},
+	})
+
+	useEffect(() => {
+		if (actors?.length && useCases?.length) {
+			console.log(actors, useCases)
+
+			mutate()
+		}
+	}, [actors, useCases])
+
+	return (
+		<div {...getRootProps()} className='w-full'>
+			<input {...getInputProps()} />
+			{isDragActive ? (
+				<button className='btn btn-primary w-full' type='button'>
+					Drop Here
+				</button>
+			) : (
+				<button className='btn btn-primary w-full' type='button'>
+					Update Attributes
+				</button>
+			)}
+		</div>
+	)
+}
 
 export default function Info() {
+	const dataToURL = (useCases: Attribute[], actors: Attribute[]) => {
+		const cleanedActors = actors.map(e => ({
+			name: e.name,
+			complexity: e.complexity,
+			description: e?.description || '',
+		}))
+
+		const cleanedUseCases = useCases.map(e => ({
+			name: e.name,
+			complexity: e.complexity,
+			description: e?.description || '',
+		}))
+
+		const data = {
+			actors: cleanedActors,
+			useCases: cleanedUseCases,
+		}
+
+		const raw = `text/json;charset=utf-8,${encodeURIComponent(
+			JSON.stringify(data, null, 4)
+		)}`
+
+		return `data:${raw}`
+	}
+
 	const { id } = useParams()
 	const { data, error, isLoading, isError } = useGetProjectDetails(
 		id as string
@@ -15,6 +112,16 @@ export default function Info() {
 		const errorObject = error as any
 		toast.error(errorObject?.response?.data?.message[0])
 	}
+
+	const downloadBtnRef = useRef<HTMLButtonElement>(null)
+
+	useEffect(() => {
+		if (data) {
+			const { useCases, actors } = data.data.data
+			const url = dataToURL(useCases, actors)
+			downloadBtnRef?.current?.setAttribute('href', url)
+		}
+	}, [data])
 
 	return (
 		<div className='p-3'>
@@ -34,9 +141,27 @@ export default function Info() {
 			<h1 className='text-2xl mb-6 '>
 				{data?.data?.data?.organization?.name}
 			</h1>
-			<hr className='mb-5' />
+			<hr />
 
+			<Link to={`/dashboard/projects/${id}/estimates`}>
+				<button type='button' className='btn btn-primary mt-10 mb-10'>
+					<BsGear size={28} className='mr-2' /> Calculate Estimates
+				</button>
+			</Link>
 			<h1 className='text-3xl mb-6 font-bold'>Project Attributes</h1>
+
+			<div className='grid grid-flow-col'>
+				<UploadAttributes />
+
+				<a
+					className='btn btn-secondary ml-5'
+					href='?'
+					ref={downloadBtnRef as any}
+					download={`${slugify(data?.data?.data?.name || '')}.json`}
+				>
+					Download Attributes
+				</a>
+			</div>
 
 			<h1 className='text-2xl mb-3'>Actors</h1>
 
@@ -150,12 +275,6 @@ export default function Info() {
 					</button>
 				</div>
 			)}
-
-			<Link to={`/dashboard/projects/${id}/estimates`}>
-				<button type='button' className='btn btn-primary mt-10'>
-					<BsGear size={28} className='mr-2' /> Calculate Estimates
-				</button>
-			</Link>
 		</div>
 	)
 }

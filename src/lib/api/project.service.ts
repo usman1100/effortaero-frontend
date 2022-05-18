@@ -11,4 +11,7 @@ export default class ProjectServiec extends BaseService {
 	deleteOne = (id: string): any => this.delete(`${this.prefix}/${id}`)
 
 	getOne = (id: string): any => this.get(`${this.prefix}/${id}`)
+
+	updateOne = (id: string, info: projectInfo): any =>
+		this.put(`${this.prefix}/${id}`, info)
 }
