@@ -74,7 +74,7 @@ export default function Profile() {
 				</button>
 			</form>
 
-			<ChangePassword />
+			{userInfo?.authProvider ? null : <ChangePassword />}
 		</div>
 	)
 }

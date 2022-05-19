@@ -17,13 +17,11 @@ function Register({ setAuthPage }: RegisterPageProps) {
 		},
 		validate,
 		onSubmit: () => {
-			console.log('submitting')
-
 			mutate()
 		},
 	})
 
-	const { mutate } = useRegister({
+	const { mutate, isLoading } = useRegister({
 		...formik.values,
 		role: formik.values.role ? 'owner' : 'user',
 	})
@@ -150,7 +148,10 @@ function Register({ setAuthPage }: RegisterPageProps) {
 
 				<button
 					type='submit'
-					className='w-1/2 mx-auto btn btn-primary capitalize'
+					className={`w-1/2 mx-auto btn ${
+						isLoading ? 'loading' : 'btn-primary'
+					} capitalize`}
+					disabled={isLoading}
 				>
 					Register
 				</button>

@@ -23,7 +23,7 @@ export default function Navbar() {
 					<label tabIndex={0} className='avatar'>
 						<div className='rounded-full'>
 							<Avatar
-								name='Usman Ahmed'
+								name={data?.data?.data?.name}
 								className='text-slate-50'
 								size='50'
 							/>
