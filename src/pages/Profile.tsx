@@ -1,6 +1,7 @@
 import { useFormik } from 'formik'
 import React, { useEffect } from 'react'
 import toast from 'react-hot-toast'
+import ChangePassword from '../components/ChangePassword'
 import { UpdateUserDetails } from '../lib/api'
 import useMyDetails from '../lib/hooks/user/useMyDetails'
 import useUpdateMyInfo from '../lib/hooks/user/useUpdateMyInfo'
@@ -69,9 +70,11 @@ export default function Profile() {
 				</div>
 
 				<button className='btn btn-primary w-1/2' type='submit'>
-					Update Changes
+					Update Info
 				</button>
 			</form>
+
+			<ChangePassword />
 		</div>
 	)
 }

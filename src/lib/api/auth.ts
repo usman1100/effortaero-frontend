@@ -1,5 +1,10 @@
 import BaseService from './base'
-import { LoginDetails, RegisterDetails, SocialLoginDetails } from './types'
+import {
+	ChangePasswordDTO,
+	LoginDetails,
+	RegisterDetails,
+	SocialLoginDetails,
+} from './types'
 
 export default class AuthService extends BaseService {
 	private prefix = `${this.baseURL}/auth`
@@ -27,4 +32,7 @@ export default class AuthService extends BaseService {
 
 	socialLogin = (info: SocialLoginDetails) =>
 		this.post(`${this.prefix}/social-login`, info)
+
+	changePassword = (info: ChangePasswordDTO) =>
+		this.post(`${this.prefix}/change-password`, info)
 }

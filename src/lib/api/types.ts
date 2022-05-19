@@ -23,3 +23,8 @@ export interface UpdateUserDetails {
 }
 
 export interface SearchUsersType extends UpdateUserDetails {}
+
+export interface ChangePasswordDTO {
+	oldPassword: string
+	newPassword: string
+}

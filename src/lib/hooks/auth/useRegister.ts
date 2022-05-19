@@ -17,8 +17,8 @@ const useRegister = (registerDetails: RegisterDetails) => {
 		onSuccess: (data: any) => {
 			const info = data.data.data
 			login(info.token, info.user.role)
-			toast.success('Login Successful')
-			redirect('/dashboard/organization')
+			toast.success('An email has been sent to your mail')
+			redirect('/')
 		},
 	})
 }
