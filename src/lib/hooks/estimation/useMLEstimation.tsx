@@ -10,5 +10,8 @@ export default function useMLEstimation(id: string) {
 			await queryClient.invalidateQueries(['estimation', id, 'ml'])
 			toast.success('Estimation done!')
 		},
+		onError:(error:any)=>{
+			toast.error(error?.response?.data?.message || 'Error')
+		}
 	})
 }

@@ -26,7 +26,7 @@ export default function OrganizationItem({
 
 				<p>Created on {formatDate(createdAt) || 'datetime error'}</p>
 
-				{members && (
+				{members ? (
 					<div className='grid grid-flow-col items-center mr-auto gap-3'>
 						<BsFillPeopleFill />
 						<p>
@@ -34,7 +34,7 @@ export default function OrganizationItem({
 							{members > 1 ? 'Members' : 'Member'}
 						</p>
 					</div>
-				)}
+				):null}
 				<div className='card-actions justify-end'>
 					<Link to={`/dashboard/organization/${id}`}>
 						<button type='button' className='btn btn-primary'>

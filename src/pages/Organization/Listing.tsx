@@ -27,12 +27,12 @@ export default function Listing() {
 						<>
 							{data.data.data.map((item: OrgInfo) => (
 								<OrganizationItem
-									slogan={item.org?.slogan}
-									id={item.org._id}
-									members={item.members.length}
-									key={item.org.name}
-									name={item.org.name}
-									createdAt={item.org.createdAt}
+									slogan={item?.org?.slogan}
+									id={item?.org._id}
+									members={item?.members?.length || 0}
+									key={item?.org.name}
+									name={item?.org.name}
+									createdAt={item?.org.createdAt}
 								/>
 							))}
 						</>

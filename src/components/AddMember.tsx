@@ -63,7 +63,7 @@ export default function AddMember({ members }: { members: any[] }) {
 							) === -1
 						) {
 							return (
-								<div className='flex items-center border-2 p-2 rounded-xl my-2 w-2/5'>
+								<div className='flex items-center border-2 p-2 rounded-xl my-2 w-2/5' key={e._id}>
 									<p>{e.email}</p>
 									<button
 										onClick={() => {

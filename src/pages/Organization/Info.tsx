@@ -42,7 +42,7 @@ export default function Info() {
 
 					<div className='grid xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 gap-10'>
 						{members.map(e => (
-							<MemberCard {...e} />
+							<MemberCard {...e}  key={e?._id}/>
 						))}
 					</div>
 

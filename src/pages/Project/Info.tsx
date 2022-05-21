@@ -179,7 +179,7 @@ export default function Info() {
 						<tbody>
 							{data?.data?.data?.actors?.map(
 								(actor: Attribute, index: number) => (
-									<tr>
+									<tr key={JSON.stringify(actor)}>
 										<th>{index + 1}</th>
 										<td>{actor.name}</td>
 										<td>{actor.complexity}</td>
@@ -235,7 +235,7 @@ export default function Info() {
 						<tbody>
 							{data?.data?.data?.useCases?.map(
 								(uc: Attribute, index: number) => (
-									<tr>
+									<tr key={JSON.stringify(uc)}>
 										<th>{index + 1}</th>
 										<td>{uc.name}</td>
 										<td>{uc.complexity}</td>
