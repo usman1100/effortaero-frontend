@@ -1,8 +1,8 @@
 import { AiOutlineDelete } from 'react-icons/ai'
 import { useParams } from 'react-router-dom'
 import useDeleteEstimation from '../lib/hooks/estimation/useDeleteEstimation'
-import useMLEstimation from '../lib/hooks/estimation/useMLEstimation'
-import useProjectEstimations from '../lib/hooks/estimation/useProjectEstimations'
+import useCreateEstimation, { EstimationEnum } from '../lib/hooks/estimation/useCreateEstimation'
+import useGetEstimations from '../lib/hooks/estimation/useGetEstimations'
 import { formatDate, formatTime } from '../utils/datetime'
 
 function EstimationCard({ data }: { data: any }) {
@@ -37,8 +37,8 @@ function EstimationCard({ data }: { data: any }) {
 export default function MachineLearning() {
 	const { id } = useParams()
 
-	const { mutate, isLoading } = useMLEstimation(id as string)
-	const { data: estimations } = useProjectEstimations(id as string, 'ml')
+	const { mutate, isLoading } = useCreateEstimation(id as string, EstimationEnum.ML)
+	const { data: estimations } = useGetEstimations(id as string, EstimationEnum.ML)
 
 	return (
 		<div className='p-5'>

@@ -1,11 +1,12 @@
 import { useParams } from 'react-router-dom'
-import useProjectEstimations from '../lib/hooks/estimation/useProjectEstimations'
+import { EstimationEnum } from '../lib/hooks/estimation/useCreateEstimation'
+import useProjectEstimations from '../lib/hooks/estimation/useGetEstimations'
 
 export default function Delhpi() {
 	const { id } = useParams()
 	const { data: estimates, isLoading } = useProjectEstimations(
 		id as string,
-		'delphi'
+		EstimationEnum.DELPHI
 	)
 
 	return (

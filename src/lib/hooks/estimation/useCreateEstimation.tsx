@@ -2,12 +2,18 @@ import toast from 'react-hot-toast'
 import { useMutation, useQueryClient } from 'react-query'
 import EstimationService from '../../api/estimation.service'
 
-export default function useMLEstimation(id: string) {
+export enum EstimationEnum {
+	ML = 'ml',
+	UCP = 'ucp',
+	DELPHI = 'delphi',
+}
+
+export default function useMLEstimation(id: string, estimationType: EstimationEnum) {
 	const estAPI = new EstimationService()
 	const queryClient = useQueryClient()
-	return useMutation(() => estAPI.ml(id), {
+	return useMutation(() => estAPI.createOne(id, estimationType), {
 		onSuccess: async () => {
-			await queryClient.invalidateQueries(['estimation', id, 'ml'])
+			await queryClient.invalidateQueries(['estimation', id, estimationType])
 			toast.success('Estimation done!')
 		},
 		onError:(error:any)=>{
