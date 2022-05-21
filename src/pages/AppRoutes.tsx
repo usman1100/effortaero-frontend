@@ -16,6 +16,7 @@ import Estimate from './Project/Estimate'
 import ProjectInfo from './Project/Info'
 import ProjectListing from './Project/Listing'
 import Settings from './Settings'
+import UCP from './UCP'
 
 export default function AppRoutes() {
 	const role = AuthStore(state => state.role)
@@ -49,6 +50,12 @@ export default function AppRoutes() {
 								path='/dashboard/projects/:id/ml'
 								element={<MachineLearning />}
 							/>
+
+							<Route
+								path='/dashboard/projects/:id/ucp'
+								element={<UCP />}
+							/>
+
 							<Route
 								path='/dashboard/projects/:id/delphi'
 								element={<Delhpi />}
