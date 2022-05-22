@@ -12,8 +12,11 @@ export default class EstimationService extends BaseService {
 
 	deleteOne = (id: string) => this.delete(`${this.prefix}/${id}`)
 
-	getDelphiRound = (projectID: string) =>
+	getProjectDelphiRounds = (projectID: string) =>
 		this.get(`${this.prefix}/delphi/project/${projectID}`)
+
+	getDelphiRound = (id: string) =>
+		this.get(`${this.prefix}/delphi/round/${id}`)
 
 	createDelphiRound = (projectID: string) =>
 		this.post(`${this.prefix}/delphi/`, { projectID })

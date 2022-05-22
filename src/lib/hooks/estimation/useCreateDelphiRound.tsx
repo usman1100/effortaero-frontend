@@ -8,7 +8,11 @@ const useCreateDelphiRounds = (projectID: string) => {
 
 	return useMutation(() => estAPI.createDelphiRound(projectID), {
 		onSuccess: async () => {
-			await queryClient.invalidateQueries(['delphi', projectID])
+			await queryClient.invalidateQueries([
+				'delphi',
+				'project',
+				projectID,
+			])
 			toast.success('Round Created')
 		},
 		onError: (error: any) => {

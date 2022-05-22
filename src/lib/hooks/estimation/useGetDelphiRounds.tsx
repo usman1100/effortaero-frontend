@@ -5,8 +5,8 @@ const useGetDelphiRounds = (projectID: string) => {
 	const estAPI = new EstimationService()
 
 	return useQuery(
-		['delphi', projectID],
-		() => estAPI.getDelphiRound(projectID),
+		['delphi', 'project', projectID],
+		() => estAPI.getProjectDelphiRounds(projectID),
 		{}
 	)
 }

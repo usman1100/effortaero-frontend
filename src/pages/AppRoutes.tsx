@@ -5,6 +5,7 @@ import NotFound from './404'
 import Auth from './Auth'
 import Dashboard from './Dashboard'
 import Delhpi from './Delphi'
+import DelhpiRound from './DelphiRound'
 import MachineLearning from './MachineLearning'
 import NewProject from './NewProject'
 import Create from './Organization/Create'
@@ -60,6 +61,11 @@ export default function AppRoutes() {
 							<Route
 								path='/dashboard/projects/:id/delphi'
 								element={<Delhpi />}
+							/>
+
+							<Route
+								path='/dashboard/projects/:id/delphi/:roundID'
+								element={<DelhpiRound />}
 							/>
 
 							<Route
