@@ -19,6 +19,10 @@ const ownerItems = [
 		icon: <AiFillProject className='mr-2' size={iconSize} />,
 	},
 	{
+		url: 'stats',
+		icon: <AiFillProject className='mr-2' size={iconSize} />,
+	},
+	{
 		url: 'Profile',
 		icon: <IoMdPerson className='mr-2' size={iconSize} />,
 	},

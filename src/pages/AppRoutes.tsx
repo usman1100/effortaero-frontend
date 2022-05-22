@@ -16,6 +16,7 @@ import Estimate from './Project/Estimate'
 import ProjectInfo from './Project/Info'
 import ProjectListing from './Project/Listing'
 import Settings from './Settings'
+import Stats from './Stats'
 import UCP from './UCP'
 
 export default function AppRoutes() {
@@ -60,6 +61,12 @@ export default function AppRoutes() {
 								path='/dashboard/projects/:id/delphi'
 								element={<Delhpi />}
 							/>
+
+							<Route
+								path='/dashboard/stats'
+								element={<Stats />}
+							/>
+
 							<Route
 								path='/dashboard/projects/:id'
 								element={<ProjectInfo />}
