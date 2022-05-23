@@ -14,4 +14,6 @@ export default class ProjectServiec extends BaseService {
 
 	updateOne = (id: string, info: projectInfo): any =>
 		this.put(`${this.prefix}/${id}`, info)
+
+	findByOrg = (orgId: string): any => this.get(`${this.prefix}/org/${orgId}`)
 }

@@ -1,7 +1,9 @@
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import AddMember from '../../components/AddMember'
 import MemberCard from '../../components/MemberCard'
+import ProjectCard from '../../components/ProjectCard'
 import useGetOrgInfo from '../../lib/hooks/organizations/useGetOrgInfo'
+import useGetProjectByOrg from '../../lib/hooks/projects/useGetProjectByOrg'
 import AuthStore from '../../lib/state/authStore'
 import { formatDate } from '../../utils/datetime'
 
@@ -9,6 +11,9 @@ export default function Info() {
 	const { id } = useParams()
 
 	const role = AuthStore(state => state.role)
+
+	const { data: _projects } = useGetProjectByOrg(id as string)
+	const projects = _projects?.data?.data
 
 	const { data, isLoading } = useGetOrgInfo(id as string)
 	const org = data?.data?.data?.org
@@ -42,11 +47,25 @@ export default function Info() {
 
 					<div className='grid xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 gap-10'>
 						{members.map(e => (
-							<MemberCard {...e}  key={e?._id}/>
+							<MemberCard {...e} key={e?._id} />
 						))}
 					</div>
 
 					{role === 'owner' && <AddMember members={members} />}
+
+					{projects?.length > 0 ? (
+						<>
+							{projects.map((e: any) => (
+								<Link
+									to={`/dashboard/projects/${e?._id}/delphi`}
+								>
+									<ProjectCard {...e} />
+								</Link>
+							))}
+						</>
+					) : (
+						<h1>No projects have been created yet</h1>
+					)}
 				</>
 			)}
 		</div>

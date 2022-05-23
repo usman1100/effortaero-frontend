@@ -59,16 +59,6 @@ export default function AppRoutes() {
 							/>
 
 							<Route
-								path='/dashboard/projects/:id/delphi'
-								element={<Delhpi />}
-							/>
-
-							<Route
-								path='/dashboard/projects/:id/delphi/:roundID'
-								element={<DelhpiRound />}
-							/>
-
-							<Route
 								path='/dashboard/stats'
 								element={<Stats />}
 							/>
@@ -84,6 +74,17 @@ export default function AppRoutes() {
 							element={<JoinedOrgs />}
 						/>
 					)}
+
+					<Route
+						path='/dashboard/projects/:id/delphi'
+						element={<Delhpi />}
+					/>
+
+					<Route
+						path='/dashboard/projects/:id/delphi/:roundID'
+						element={<DelhpiRound />}
+					/>
+
 					<Route
 						path='/dashboard/projects'
 						element={<ProjectListing />}

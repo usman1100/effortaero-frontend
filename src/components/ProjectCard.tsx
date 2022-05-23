@@ -2,6 +2,7 @@ import toast from 'react-hot-toast'
 import { AiOutlineDelete, AiOutlineInfoCircle } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import useDeleteProject from '../lib/hooks/projects/useDeleteProject'
+import AuthStore from '../lib/state/authStore'
 import { formatDate } from '../utils/datetime'
 
 interface Props {
@@ -24,6 +25,7 @@ export default function ProjectCard({
 	const iconSize = 26
 
 	const { mutate: deleteProject } = useDeleteProject(_id)
+	const role = AuthStore(state => state.role)
 
 	const handleDelete = () => {
 		const proName = prompt(
@@ -55,28 +57,30 @@ export default function ProjectCard({
 					</div>
 				</div>
 			</div>
-			<div className='grid grid-cols-3 justify-center content-center'>
-				<Link to={`/dashboard/projects/${_id}`}>
+			{role === 'OWNER' && (
+				<div className='grid grid-cols-3 justify-center content-center'>
+					<Link to={`/dashboard/projects/${_id}`}>
+						<button
+							type='button'
+							className='btn btn-info btn-circle ml-4 capitalize'
+						>
+							<div className='tooltip' data-tip='More info'>
+								<AiOutlineInfoCircle size={iconSize} />
+							</div>
+						</button>
+					</Link>
+
 					<button
 						type='button'
-						className='btn btn-info btn-circle ml-4 capitalize'
+						className='btn btn-warning btn-circle ml-4 capitalize'
+						onClick={handleDelete}
 					>
-						<div className='tooltip' data-tip='More info'>
-							<AiOutlineInfoCircle size={iconSize} />
-						</div>
+						<p className='tooltip' data-tip='Delete project'>
+							<AiOutlineDelete size={iconSize} />
+						</p>
 					</button>
-				</Link>
-
-				<button
-					type='button'
-					className='btn btn-warning btn-circle ml-4 capitalize'
-					onClick={handleDelete}
-				>
-					<p className='tooltip' data-tip='Delete project'>
-						<AiOutlineDelete size={iconSize} />
-					</p>
-				</button>
-			</div>
+				</div>
+			)}
 		</div>
 	)
 }
