@@ -8,6 +8,16 @@ const useDeleteEstimation = (id: string, projectID: string) => {
 	return useMutation(() => estAPI.deleteOne(id), {
 		onSuccess: async () => {
 			await queryClient.invalidateQueries(['estimation', projectID, 'ml'])
+			await queryClient.invalidateQueries([
+				'estimation',
+				projectID,
+				'delphi',
+			])
+			await queryClient.invalidateQueries([
+				'estimation',
+				projectID,
+				'ucp',
+			])
 			toast.success('Deleted successfully!')
 		},
 	})

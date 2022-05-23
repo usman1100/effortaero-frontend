@@ -2,18 +2,18 @@ import { useFormik } from 'formik'
 import { useParams } from 'react-router-dom'
 import BackButton from '../components/BackButton'
 import useAddContribution from '../lib/hooks/estimation/useAddContribution'
+import useEndRound from '../lib/hooks/estimation/useEndRound'
 import useGetOneDelphiRound from '../lib/hooks/estimation/useGetOneDelphiRound'
-import useMyDetails from '../lib/hooks/user/useMyDetails'
+import AuthStore from '../lib/state/authStore'
 
 // const hasMadeContribution = (contributions, userID) => {}
 
 export default function DelhpiRound() {
-	const { roundID } = useParams()
-	const { data } = useGetOneDelphiRound(roundID as string)
-	const contributions = data?.data?.data?.contributions
+	const { roundID, id } = useParams()
+	const { data: roundData } = useGetOneDelphiRound(roundID as string)
+	const contributions = roundData?.data?.data?.contributions
 
-	const { data: _user } = useMyDetails()
-	const user = _user?.data?.data
+	const role = AuthStore(store => store.role)
 
 	const formik = useFormik({
 		initialValues: {
@@ -21,10 +21,15 @@ export default function DelhpiRound() {
 			message: '',
 		},
 		onSubmit: () => {
-			mutate()
+			addContribution()
 		},
 	})
-	const { mutate } = useAddContribution(roundID as string, formik.values)
+	const { mutate: addContribution } = useAddContribution(
+		roundID as string,
+		formik.values
+	)
+
+	const { mutate: endRound } = useEndRound(roundID as string, id as string)
 
 	return (
 		<div className='p-5'>
@@ -35,9 +40,13 @@ export default function DelhpiRound() {
 			{contributions?.length ? (
 				<>
 					{contributions.map((e: any) => (
-						<div className='border-2 p-5'>
-							<b>{e?.userID?.name}</b> has suggested{' '}
-							<b>{e.value}</b> man hours
+						<div className='border-2 p-5 my-4'>
+							<b className='text-2xl mx-5'>{e?.userID?.name}</b>{' '}
+							has suggested{' '}
+							<b className='text-2xl mx-5'>{e.value}</b> man hours
+							{e?.message ? (
+								<i className='ml-5 text-2xl'>{e?.message}</i>
+							) : null}
 						</div>
 					))}
 				</>
@@ -70,9 +79,30 @@ export default function DelhpiRound() {
 					placeholder='Share your thoughts...'
 				/>
 
-				<button type='submit' className='btn btn-primary  col-span-1'>
-					Submit
+				<button
+					type='submit'
+					className='btn btn-primary  col-span-1'
+					disabled={roundData?.data?.data?.hasEnded}
+				>
+					{roundData?.data?.data?.hasEnded
+						? 'Round has ended'
+						: 'Submit'}
 				</button>
+
+				{role === 'owner' ? (
+					<button
+						type='button'
+						className='btn btn-warning'
+						disabled={roundData?.data?.data?.hasEnded}
+						onClick={() => {
+							endRound()
+						}}
+					>
+						{roundData?.data?.data?.hasEnded
+							? 'Ended'
+							: 'End Round'}
+					</button>
+				) : null}
 			</form>
 		</div>
 	)

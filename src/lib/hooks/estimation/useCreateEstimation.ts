@@ -8,16 +8,23 @@ export enum EstimationEnum {
 	DELPHI = 'delphi',
 }
 
-export default function useMLEstimation(id: string, estimationType: EstimationEnum) {
+export default function useCreateEstimation(
+	id: string,
+	estimationType: EstimationEnum
+) {
 	const estAPI = new EstimationService()
 	const queryClient = useQueryClient()
 	return useMutation(() => estAPI.createOne(id, estimationType), {
 		onSuccess: async () => {
-			await queryClient.invalidateQueries(['estimation', id, estimationType])
+			await queryClient.invalidateQueries([
+				'estimation',
+				id,
+				estimationType,
+			])
 			toast.success('Estimation done!')
 		},
-		onError:(error:any)=>{
+		onError: (error: any) => {
 			toast.error(error?.response?.data?.message || 'Error')
-		}
+		},
 	})
 }
