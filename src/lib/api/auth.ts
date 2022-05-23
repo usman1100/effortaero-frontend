@@ -35,4 +35,7 @@ export default class AuthService extends BaseService {
 
 	changePassword = (info: ChangePasswordDTO) =>
 		this.post(`${this.prefix}/change-password`, info)
+
+	forgetPassword = (email: string) =>
+		this.post(`${this.prefix}/forget-password`, { email })
 }

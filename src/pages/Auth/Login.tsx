@@ -55,9 +55,16 @@ function Login({ setAuthPage }: LoginPageProps) {
 					>
 						Create a new account
 					</button>
-					<p className='ml-auto mb-5 hover:cursor-pointer'>
-						Forgot password ? 😕
-					</p>
+
+					<button
+						type='button'
+						onClick={() => {
+							setAuthPage('forget')
+						}}
+						className='mr-auto text-sky-600 mb-5 hover:cursor-pointer'
+					>
+						Forgot your password ?
+					</button>
 				</div>
 
 				<button

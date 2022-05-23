@@ -8,8 +8,7 @@ import useSocialLogin from '../../lib/hooks/auth/useSocialLogin'
 import AuthStore from '../../lib/state/authStore'
 import Login from './Login'
 import Register from './Register'
-// import LoginGithub from 'react-login-github'
-// import GithubIcon from '../../assets/images/icons/icons8-github.svg'
+import ForgetPassword from '../../components/ForgetPassword'
 
 export default function Auth() {
 	const [authPage, setAuthPage] = useState('login')
@@ -56,9 +55,21 @@ export default function Auth() {
 	const googleID =
 		'286738020826-n2caknvf798tq323kppbrqneiqoj4r0s.apps.googleusercontent.com'
 	const facebookID = '366745742092139'
-	// const githubID = '27876c2757aa11d38c4f'
 
 	const { mutate } = useSocialLogin(socilInfo)
+
+	const renderAuthPage = () => {
+		switch (authPage) {
+			case 'login':
+				return <Login setAuthPage={setAuthPage} />
+			case 'register':
+				return <Register setAuthPage={setAuthPage} />
+			case 'forget':
+				return <ForgetPassword setAuthPage={setAuthPage} />
+			default:
+				return <Login setAuthPage={setAuthPage} />
+		}
+	}
 
 	return (
 		<div className='flex'>
@@ -67,27 +78,6 @@ export default function Auth() {
 					<h1 className='text-xl font-bold'>
 						Save some clicks, use OAuth
 					</h1>
-
-					{/* <LoginGithub
-						icon={GithubIcon}
-						clientId={githubID}
-						onSuccess={githubResponse}
-						onFailure={e => {
-							console.log({ ...e })
-						}}
-						className='btn btn-secondary w-4/5'
-					>
-						<>
-							<img
-								src={GithubIcon}
-								alt='github icon'
-								height={40}
-								width={40}
-								className='mr-3'
-							/>
-							<p>Continue with Github</p>
-						</>
-					</LoginGithub> */}
 
 					<GoogleLogin
 						autoLoad={false}
@@ -129,11 +119,7 @@ export default function Auth() {
 					</p>
 				</h1>
 
-				{authPage === 'login' ? (
-					<Login setAuthPage={setAuthPage} />
-				) : (
-					<Register setAuthPage={setAuthPage} />
-				)}
+				{renderAuthPage()}
 			</div>
 		</div>
 	)
