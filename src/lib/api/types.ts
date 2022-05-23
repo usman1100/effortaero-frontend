@@ -28,3 +28,8 @@ export interface ChangePasswordDTO {
 	oldPassword: string
 	newPassword: string
 }
+
+export interface AddContributionDTO {
+	value: number
+	message?: string
+}

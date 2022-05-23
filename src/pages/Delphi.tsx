@@ -38,15 +38,19 @@ export default function Delhpi() {
 			<div className='grid grid-cols-5 gap-5 my-5'>
 				{rounds && rounds?.data?.data?.length ? (
 					<>
-						{rounds.data.data.map((r: any) => (
+						{rounds.data.data.map((r: any, i: number) => (
 							<Link
 								to={`/dashboard/projects/${id}/delphi/${r?._id}`}
 							>
 								<button
 									type='button'
-									className='btn btn-primary'
+									className={`btn ${
+										r.hasEnded
+											? 'btn-disabled'
+											: 'btn-seocndary'
+									}`}
 								>
-									Round: {r.hasEnded ? 'Ended' : 'Active'}
+									Round: # {rounds.data.data.length - i}
 								</button>
 							</Link>
 						))}

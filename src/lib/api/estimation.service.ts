@@ -1,5 +1,6 @@
 import { EstimationEnum } from '../hooks/estimation/useCreateEstimation'
 import BaseService from './base'
+import { AddContributionDTO } from './types'
 
 export default class EstimationService extends BaseService {
 	private readonly prefix = `${this.baseURL}/estimations`
@@ -23,4 +24,7 @@ export default class EstimationService extends BaseService {
 
 	endRound = (projectID: string) =>
 		this.post(`${this.prefix}/delphi/${projectID}/end`)
+
+	addContirbution = (roundID: string, contribution: AddContributionDTO) =>
+		this.put(`${this.prefix}/delphi/${roundID}`, contribution)
 }
