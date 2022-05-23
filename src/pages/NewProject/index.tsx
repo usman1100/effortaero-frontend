@@ -8,6 +8,7 @@ import AttributeCard from './AttributeCard'
 import useCreatedOrgs from '../../lib/hooks/organizations/useCreatedOrgs'
 import ActorInputForm from './AttributeInputForm'
 import useCreateProject from '../../lib/hooks/projects/useCreateProject'
+import BackButton from '../../components/BackButton'
 
 export interface Actor {
 	name: string
@@ -156,11 +157,7 @@ export default function NewProject() {
 
 	return (
 		<div className='p-4'>
-			<Link to='/dashboard/projects'>
-				<button type='button' className='btn btn-warning'>
-					Back
-				</button>
-			</Link>
+			<BackButton />
 			<h1 className='text-4xl'>Create Project</h1>
 
 			<form

@@ -57,7 +57,7 @@ export default function ProjectCard({
 					</div>
 				</div>
 			</div>
-			{role === 'OWNER' && (
+			{role === 'owner' && (
 				<div className='grid grid-cols-3 justify-center content-center'>
 					<Link to={`/dashboard/projects/${_id}`}>
 						<button

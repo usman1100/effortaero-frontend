@@ -1,9 +1,12 @@
 import { AiOutlineDelete } from 'react-icons/ai'
 import { useParams } from 'react-router-dom'
 import useDeleteEstimation from '../lib/hooks/estimation/useDeleteEstimation'
-import useCreateEstimation, { EstimationEnum } from '../lib/hooks/estimation/useCreateEstimation'
+import useCreateEstimation, {
+	EstimationEnum,
+} from '../lib/hooks/estimation/useCreateEstimation'
 import useGetEstimations from '../lib/hooks/estimation/useGetEstimations'
 import { formatDate, formatTime } from '../utils/datetime'
+import BackButton from '../components/BackButton'
 
 function EstimationCard({ data }: { data: any }) {
 	const { id: projectID } = useParams()
@@ -37,20 +40,18 @@ function EstimationCard({ data }: { data: any }) {
 export default function MachineLearning() {
 	const { id } = useParams()
 
-	const { mutate, isLoading } = useCreateEstimation(id as string, EstimationEnum.ML)
-	const { data: estimations } = useGetEstimations(id as string, EstimationEnum.ML)
+	const { mutate, isLoading } = useCreateEstimation(
+		id as string,
+		EstimationEnum.ML
+	)
+	const { data: estimations } = useGetEstimations(
+		id as string,
+		EstimationEnum.ML
+	)
 
 	return (
 		<div className='p-5'>
-			<button
-				className='btn btn-secondary'
-				type='button'
-				onClick={() => {
-					window.history.back()
-				}}
-			>
-				Back
-			</button>
+			<BackButton />
 
 			<h1 className='text-5xl mb-5'>Machine Learning</h1>
 

@@ -1,9 +1,12 @@
 import { AiOutlineDelete } from 'react-icons/ai'
 import { useParams } from 'react-router-dom'
 import useDeleteEstimation from '../lib/hooks/estimation/useDeleteEstimation'
-import useCreateEstimation, { EstimationEnum } from '../lib/hooks/estimation/useCreateEstimation'
+import useCreateEstimation, {
+	EstimationEnum,
+} from '../lib/hooks/estimation/useCreateEstimation'
 import useGetEstimations from '../lib/hooks/estimation/useGetEstimations'
 import { formatDate, formatTime } from '../utils/datetime'
+import BackButton from '../components/BackButton'
 
 function EstimationCard({ data }: { data: any }) {
 	const { id: projectID } = useParams()
@@ -20,9 +23,9 @@ function EstimationCard({ data }: { data: any }) {
 			>
 				<AiOutlineDelete size={27} />
 			</button>
-			<h1 className='font-bold text-center'>{
-                Math.round(data.value * 100) / 100
-            }</h1>
+			<h1 className='font-bold text-center'>
+				{Math.round(data.value * 100) / 100}
+			</h1>
 			<h1 className='text-center'>Work Hours</h1>
 
 			<hr className='my-5 text-teal-700' />
@@ -39,20 +42,18 @@ function EstimationCard({ data }: { data: any }) {
 export default function UCP() {
 	const { id } = useParams()
 
-	const { mutate, isLoading } = useCreateEstimation(id as string, EstimationEnum.UCP)
-	const { data: estimations } = useGetEstimations(id as string, EstimationEnum.UCP)
+	const { mutate, isLoading } = useCreateEstimation(
+		id as string,
+		EstimationEnum.UCP
+	)
+	const { data: estimations } = useGetEstimations(
+		id as string,
+		EstimationEnum.UCP
+	)
 
 	return (
 		<div className='p-5'>
-			<button
-				className='btn btn-secondary'
-				type='button'
-				onClick={() => {
-					window.history.back()
-				}}
-			>
-				Back
-			</button>
+			<BackButton />
 
 			<h1 className='text-5xl mb-5'>UCP Calculation</h1>
 

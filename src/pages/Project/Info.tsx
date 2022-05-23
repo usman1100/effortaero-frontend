@@ -9,6 +9,7 @@ import { Attribute } from '../../types/project'
 import { slugify } from '../../utils/misc'
 import { Actor } from '../NewProject'
 import useUpdateProject from '../../lib/hooks/projects/useUpdateProject'
+import BackButton from '../../components/BackButton'
 
 function UploadAttributes() {
 	const [actors, setActors] = useState<Actor[]>([])
@@ -125,11 +126,7 @@ export default function Info() {
 
 	return (
 		<div className='p-3'>
-			<Link to='/dashboard/projects'>
-				<button type='button' className='btn btn-secondary'>
-					Back
-				</button>
-			</Link>
+			<BackButton />
 
 			<h2>{isLoading && <div>Loading...</div>}</h2>
 			<h1 className='text-4xl text-center mt-4'>

@@ -1,15 +1,12 @@
 import { Link, useParams } from 'react-router-dom'
+import BackButton from '../../components/BackButton'
 
 export default function Estimate() {
 	const { id } = useParams()
 
 	return (
 		<div className='p-5'>
-			<Link to={`/dashboard/projects/${id}`}>
-				<button className='btn btn-secondary' type='button'>
-					Back
-				</button>
-			</Link>
+			<BackButton />
 			<h1 className='text-5xl mt-5'>Estimate</h1>
 			<hr />
 

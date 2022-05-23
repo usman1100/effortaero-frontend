@@ -1,5 +1,6 @@
 import { Link, useParams } from 'react-router-dom'
 import AddMember from '../../components/AddMember'
+import BackButton from '../../components/BackButton'
 import MemberCard from '../../components/MemberCard'
 import ProjectCard from '../../components/ProjectCard'
 import useGetOrgInfo from '../../lib/hooks/organizations/useGetOrgInfo'
@@ -21,15 +22,7 @@ export default function Info() {
 
 	return (
 		<div className='p-5'>
-			<button
-				className='btn btn-secondary'
-				type='button'
-				onClick={() => {
-					window.history.back()
-				}}
-			>
-				Back
-			</button>
+			<BackButton />
 			{isLoading ? (
 				<h1>Loading</h1>
 			) : (
