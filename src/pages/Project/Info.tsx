@@ -27,23 +27,27 @@ function UploadAttributes() {
 
 		const reader = new FileReader()
 		reader.onload = () => {
-			const text = reader.result
-			const obj = JSON.parse(text as string)
+			try {
+				const text = reader.result
+				const obj = JSON.parse(text as string)
 
-			if (!obj?.actors) {
-				toast.error('File does not contain actors')
-				return
+				if (!obj?.actors) {
+					toast.error('File does not contain actors')
+					return
+				}
+
+				if (!obj?.useCases) {
+					toast.error('File does not contain use cases')
+					return
+				}
+
+				setActors((prev: any) => [...prev, ...obj.actors])
+				setUseCases((prev: any) => [...prev, ...obj.useCases])
+
+				toast.success('Uploaded file')
+			} catch (e) {
+				toast.error('Invalid JSON uploaded')
 			}
-
-			if (!obj?.useCases) {
-				toast.error('File does not contain use cases')
-				return
-			}
-
-			setActors((prev: any) => [...prev, ...obj.actors])
-			setUseCases((prev: any) => [...prev, ...obj.useCases])
-
-			toast.success('Uploaded file')
 		}
 		reader.readAsText(file)
 	}, [])

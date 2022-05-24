@@ -7,9 +7,12 @@ import useCreateEstimation, {
 } from '../lib/hooks/estimation/useCreateEstimation'
 import useGetDelphiRounds from '../lib/hooks/estimation/useGetDelphiRounds'
 import useProjectEstimations from '../lib/hooks/estimation/useGetEstimations'
+import AuthStore from '../lib/state/authStore'
 
 export default function Delhpi() {
 	const { id } = useParams()
+	const role = AuthStore(store => store.role)
+
 	const { data: estimates, isLoading } = useProjectEstimations(
 		id as string,
 		EstimationEnum.DELPHI
@@ -77,27 +80,29 @@ export default function Delhpi() {
 					<h1>No Delphi Rounds have been created yet</h1>
 				)}
 
-				<div className='grid grid-cols-2'>
-					<button
-						className='btn btn-secondary ml-2'
-						type='button'
-						onClick={() => {
-							createRound()
-						}}
-					>
-						Create New Round
-					</button>
+				{role === 'owner' ? (
+					<div className='grid grid-cols-2'>
+						<button
+							className='btn btn-secondary ml-2'
+							type='button'
+							onClick={() => {
+								createRound()
+							}}
+						>
+							Create New Round
+						</button>
 
-					<button
-						className='btn btn-accent ml-2'
-						type='button'
-						onClick={() => {
-							createEstimation()
-						}}
-					>
-						Finalize an estimate
-					</button>
-				</div>
+						<button
+							className='btn btn-accent ml-2'
+							type='button'
+							onClick={() => {
+								createEstimation()
+							}}
+						>
+							Finalize an estimate
+						</button>
+					</div>
+				) : null}
 			</div>
 		</div>
 	)
