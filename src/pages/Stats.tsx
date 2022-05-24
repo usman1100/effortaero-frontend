@@ -1,56 +1,43 @@
-import { Bar } from 'react-chartjs-2'
-import {
-	ArcElement,
-	Chart,
-	BarElement,
-	CategoryScale,
-	LinearScale,
-} from 'chart.js'
-import useGetEstimations from '../lib/hooks/estimation/useGetEstimations'
-import { EstimationEnum } from '../lib/hooks/estimation/useCreateEstimation'
-import { formatDate } from '../utils/datetime'
+import { Link } from 'react-router-dom'
+import BackButton from '../components/BackButton'
+import ProjectCard from '../components/ProjectCard'
+import useGetCreatedProjects from '../lib/hooks/projects/useGetCreatedProjects'
 
 export default function Stats() {
-	Chart.register(ArcElement, BarElement, CategoryScale, LinearScale)
+	const { data, isLoading } = useGetCreatedProjects()
 
-	const { data: ml } = useGetEstimations(
-		'6288f934d2538be748c1dc74',
-		EstimationEnum.ML
-	)
-
-	const data = ml?.data?.data?.map((e: any) => e.value)
-	const labels = ml?.data?.data?.map((e: any) => formatDate(e.createdAt))
-
-	const colors = [
-		'#FF6384',
-		'#36A2EB',
-		'#FFCE56',
-		'#72a0c1',
-		'#f0f8ff',
-		'#ffd700',
-		'#ffa500',
-		'#ff4500',
-		'#efdecd',
-		'#cd5c5c',
-	]
+	if (isLoading) {
+		return <h1>Loading</h1>
+	}
 
 	return (
-		<div className='p-5'>
-			<div>
-				<Bar
-					data={{
-						labels,
-						datasets: [
-							{
-								label: '# of Votes',
-								data,
-								backgroundColor: colors?.slice(0, data?.length),
-								borderWidth: 2,
-							},
-						],
-					}}
-				/>
+		<div className='p-4'>
+			<h1 className='text-5xl'>Projects</h1>
+
+			<div className='my-5'>
+				<Link to='/dashboard/projects/new'>
+					<button type='button' className='btn btn-primary'>
+						+ Create New
+					</button>
+				</Link>
 			</div>
+
+			<div className='grid grid-cols-3 gap-1'>
+				{data &&
+					data?.data?.data?.map((pro: any) => (
+						<Link to={`/dashboard/stats/${pro?._id}`}>
+							<ProjectCard
+								key={pro._id}
+								{...pro}
+								showOptions={false}
+							/>
+						</Link>
+					))}
+			</div>
+
+			{data?.data?.data?.length === 0 && (
+				<h1 className='text-3xl font-bold'>No Project Created</h1>
+			)}
 		</div>
 	)
 }

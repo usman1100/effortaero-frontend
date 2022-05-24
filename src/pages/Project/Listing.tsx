@@ -19,7 +19,7 @@ export default function Listing() {
 
 			{!isLoading &&
 				data?.data?.data?.map((pro: any) => (
-					<ProjectCard key={pro._id} {...pro} />
+					<ProjectCard key={pro._id} {...pro} showOptions />
 				))}
 
 			{data?.data?.data?.length === 0 && (

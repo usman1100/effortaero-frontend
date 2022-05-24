@@ -46,13 +46,18 @@ export default function Info() {
 
 					{role === 'owner' && <AddMember members={members} />}
 
+					<h1 className='font-bold mt-5'>Organization Projects</h1>
+
 					{projects?.length > 0 ? (
 						<>
 							{projects.map((e: any) => (
 								<Link
 									to={`/dashboard/projects/${e?._id}/delphi`}
 								>
-									<ProjectCard {...e} />
+									<ProjectCard
+										{...e}
+										showOptions={role === 'owner'}
+									/>
 								</Link>
 							))}
 						</>

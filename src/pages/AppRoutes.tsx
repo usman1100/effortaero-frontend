@@ -16,6 +16,7 @@ import Profile from './Profile'
 import Estimate from './Project/Estimate'
 import ProjectInfo from './Project/Info'
 import ProjectListing from './Project/Listing'
+import ProjectStats from './Project/ProjectStats'
 import Settings from './Settings'
 import Stats from './Stats'
 import UCP from './UCP'
@@ -61,6 +62,10 @@ export default function AppRoutes() {
 							<Route
 								path='/dashboard/stats'
 								element={<Stats />}
+							/>
+							<Route
+								path='/dashboard/stats/:id'
+								element={<ProjectStats />}
 							/>
 
 							<Route

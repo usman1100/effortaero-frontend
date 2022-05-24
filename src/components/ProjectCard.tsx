@@ -1,11 +1,12 @@
-import toast from 'react-hot-toast'
 import { AiOutlineDelete, AiOutlineInfoCircle } from 'react-icons/ai'
+import toast from 'react-hot-toast'
 import { Link } from 'react-router-dom'
-import useDeleteProject from '../lib/hooks/projects/useDeleteProject'
 import AuthStore from '../lib/state/authStore'
 import { formatDate } from '../utils/datetime'
+import useDeleteProject from '../lib/hooks/projects/useDeleteProject'
 
 interface Props {
+	showOptions?: boolean
 	_id: string
 	name: string
 	actors: any[]
@@ -21,6 +22,7 @@ export default function ProjectCard({
 	organization,
 	useCases,
 	createdAt,
+	showOptions,
 }: Props) {
 	const iconSize = 26
 
@@ -57,7 +59,7 @@ export default function ProjectCard({
 					</div>
 				</div>
 			</div>
-			{role === 'owner' && (
+			{showOptions ? (
 				<div className='grid grid-cols-3 justify-center content-center'>
 					<Link to={`/dashboard/projects/${_id}`}>
 						<button
@@ -80,7 +82,7 @@ export default function ProjectCard({
 						</p>
 					</button>
 				</div>
-			)}
+			) : null}
 		</div>
 	)
 }
