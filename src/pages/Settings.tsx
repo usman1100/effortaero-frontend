@@ -3,17 +3,6 @@ import ThemeSwitch from '../components/ThemeSwitch'
 import AuthStore from '../lib/state/authStore'
 
 export default function Settings() {
-	const buttonTypes = [
-		'primary',
-		'secondary',
-		'info',
-		'warning',
-		'btn-danger',
-		'success',
-		'light',
-		'btn-dark',
-	]
-
 	const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1)
 
 	const logout = AuthStore(state => state.logout)
@@ -36,13 +25,47 @@ export default function Settings() {
 					</button>
 				</div>
 
-				<div className='border-2 col-span-2'>
-					<div className=''>
-						{buttonTypes.map((e: string) => (
-							<button type='button' className={`btn ${e}`}>
-								{capitalize(e)}
-							</button>
-						))}
+				<div className='col-span-2'>
+					<div className='grid grid-cols-4 gap-5 p-5'>
+						<button type='button' className='btn btn-primary'>
+							Primary
+						</button>
+
+						<button type='button' className='btn btn-secondary'>
+							Secondary
+						</button>
+
+						<button type='button' className='btn btn-accent'>
+							Accent
+						</button>
+
+						<button type='button' className='btn btn-success'>
+							Success
+						</button>
+
+						<button type='button' className='btn btn-error'>
+							Error
+						</button>
+
+						<button type='button' className='btn btn-ghost'>
+							Ghost
+						</button>
+
+						<button type='button' className='btn btn-link'>
+							Link
+						</button>
+
+						<button type='button' className='btn btn-outline'>
+							Outline
+						</button>
+
+						<button type='button' className='btn glass'>
+							Glass
+						</button>
+
+						<button type='button' className='btn loading'>
+							Loading
+						</button>
 					</div>
 				</div>
 			</div>
