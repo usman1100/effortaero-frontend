@@ -19,6 +19,8 @@ export function switchTheme(newTheme: string) {
 export default function ThemeSwitch() {
 	const [theme, setTheme] = useState(getTheme())
 	const themes = [
+		'candy',
+		'rad',
 		'light',
 		'dark',
 		'cupcake',
@@ -27,7 +29,6 @@ export default function ThemeSwitch() {
 		'corporate',
 		'synthwave',
 		'retro',
-		'cyberpunk',
 		'valentine',
 		'halloween',
 		'garden',

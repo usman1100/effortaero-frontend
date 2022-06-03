@@ -15,4 +15,7 @@ export default class OrgService extends BaseService {
 
 	addMember = (orgID: string, userID: string) =>
 		this.post(`${this.prefix}/${orgID}/member`, { userID })
+
+	removeMember = (memberID: string) =>
+		this.delete(`${this.prefix}/member/${memberID}`)
 }
