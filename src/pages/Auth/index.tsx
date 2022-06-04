@@ -1,126 +1,118 @@
-import React, { useEffect, useState } from 'react'
-import GoogleLogin from 'react-google-login'
-import FacebookLogin from 'react-facebook-login'
-import { useNavigate } from 'react-router-dom'
-import FacebookLogo from '../../assets/images/icons/icons8-facebook.svg'
-import { SocialLoginDetails } from '../../lib/api'
-import useSocialLogin from '../../lib/hooks/auth/useSocialLogin'
-import AuthStore from '../../lib/state/authStore'
-import Login from './Login'
-import Register from './Register'
-import ForgetPassword from '../../components/ForgetPassword'
+import { Box } from '@mui/system'
+import { Button, Grid, TextField, Typography } from '@mui/material'
+import { useFormik } from 'formik'
 
 export default function Auth() {
-	const [authPage, setAuthPage] = useState('login')
+	interface LoginDetails {
+		email: string
+		password: string
+	}
 
-	const redirect = useNavigate()
+	const validationSchema = (values: LoginDetails): LoginDetails | null => {
+		const errors: LoginDetails = {
+			email: '',
+			password: '',
+		}
+		if (!values.email) {
+			errors.email = 'Enter an email'
+		}
 
-	const isLoggedIn = AuthStore(state => state.isLoggedIn)
-	React.useEffect(() => {
-		if (isLoggedIn) redirect('/dashboard/organization')
-	}, [])
+		if (values.password.length < 8) {
+			errors.password = 'Length must be 8 characters or more'
+		}
 
-	const [socilInfo, setSocialInfo] = useState<SocialLoginDetails>({
-		email: '',
-		name: '',
-		authProvider: 'google',
+		return errors.email || errors.password ? errors : null
+	}
+
+	const formik = useFormik<LoginDetails>({
+		initialValues: {
+			email: '',
+			password: '',
+		},
+		validate: validationSchema as LoginDetails,
+		onSubmit: e => {
+			console.log(e)
+		},
 	})
 
-	const responseGoogle = (e: any) => {
-		if (!e.error) {
-			setSocialInfo({
-				name: e.profileObj.name,
-				email: e.profileObj.email,
-				authProvider: 'google',
-			})
-		}
-	}
-
-	const facebookResponse = (e: any) => {
-		if (!e.error) {
-			setSocialInfo({
-				name: e.name,
-				email: e.email,
-				authProvider: 'facebook',
-			})
-		}
-	}
-
-	useEffect(() => {
-		if (socilInfo.email) {
-			mutate()
-		}
-	}, [socilInfo])
-
-	const googleID =
-		'286738020826-n2caknvf798tq323kppbrqneiqoj4r0s.apps.googleusercontent.com'
-	const facebookID = '366745742092139'
-
-	const { mutate } = useSocialLogin(socilInfo)
-
-	const renderAuthPage = () => {
-		switch (authPage) {
-			case 'login':
-				return <Login setAuthPage={setAuthPage} />
-			case 'register':
-				return <Register setAuthPage={setAuthPage} />
-			case 'forget':
-				return <ForgetPassword setAuthPage={setAuthPage} />
-			default:
-				return <Login setAuthPage={setAuthPage} />
-		}
-	}
-
 	return (
-		<div className='flex'>
-			<div className='h-screen w-2/3 flex bg-blue-400 p-5'>
-				<div className='m-auto w-full text-center'>
-					<h1 className='text-xl font-bold'>
-						Save some clicks, use OAuth
-					</h1>
+		<Grid
+			container
+			sx={{
+				height: '100vh',
+			}}
+		>
+			<Grid item lg={4}>
+				<Box
+					display='grid'
+					sx={{
+						marginTop: '30%',
+						gridTemplateColumns: '1fr',
+						gap: '5%',
+						padding: '5%',
+					}}
+				>
+					<Button variant='outlined' color='primary'>
+						Facebook
+					</Button>
+					<Button variant='outlined' color='secondary'>
+						Google
+					</Button>
+					<Button variant='outlined' color='success' startIcon={null}>
+						Github
+					</Button>
+				</Box>
+			</Grid>
 
-					<GoogleLogin
-						autoLoad={false}
-						clientId={googleID}
-						buttonText='Login'
-						onSuccess={responseGoogle}
-						onFailure={responseGoogle}
-						cookiePolicy='single_host_origin'
-						className='btn btn-primary w-4/5 my-3'
-					>
-						Continue with Google
-					</GoogleLogin>
+			<Grid item lg={8} margin='auto' padding='2%'>
+				<Typography variant='h1' textAlign='center'>
+					EfforAero
+				</Typography>
 
-					<FacebookLogin
-						appId={facebookID}
-						autoLoad={false}
-						fields='name,email,picture'
-						callback={facebookResponse}
-						textButton='Continue with Facebook'
-						icon={
-							<img
-								className='mr-2'
-								src={FacebookLogo}
-								height={30}
-								width={30}
-								alt='facebook logo'
-							/>
+				<Typography variant='h4' textAlign='center'>
+					Software Cost Estimation Redefined
+				</Typography>
+
+				<form onSubmit={formik.handleSubmit}>
+					<TextField
+						name='email'
+						type='email'
+						id='email'
+						placeholder='Enter your email'
+						required
+						fullWidth
+						margin='normal'
+						value={formik.values.email}
+						onChange={formik.handleChange}
+						error={
+							formik.touched.email && Boolean(formik.errors.email)
 						}
-						cssClass='btn btn-warning w-4/5'
+						helperText={formik.touched.email && formik.errors.email}
 					/>
-				</div>
-			</div>
+					<TextField
+						name='password'
+						type='password'
+						id='password'
+						placeholder='Enter your password'
+						required
+						fullWidth
+						margin='normal'
+						value={formik.values.password}
+						onChange={formik.handleChange}
+						error={
+							formik.touched.password &&
+							Boolean(formik.errors.password)
+						}
+						helperText={
+							formik.touched.password && formik.errors.password
+						}
+					/>
 
-			<div className='p-5 w-full text-center'>
-				<h1 className='text-5xl my-20 font-semibold'>
-					Effort Aero
-					<p className='text-2xl my-5 font-light capitalize'>
-						software cost estimation redefined 🚀
-					</p>
-				</h1>
-
-				{renderAuthPage()}
-			</div>
-		</div>
+					<Button type='submit' variant='contained' size='large'>
+						Login
+					</Button>
+				</form>
+			</Grid>
+		</Grid>
 	)
 }
