@@ -1,7 +1,6 @@
 import { AiOutlineDelete, AiOutlineInfoCircle } from 'react-icons/ai'
 import toast from 'react-hot-toast'
 import { Link } from 'react-router-dom'
-import AuthStore from '../lib/state/authStore'
 import { formatDate } from '../utils/datetime'
 import useDeleteProject from '../lib/hooks/projects/useDeleteProject'
 
@@ -27,7 +26,6 @@ export default function ProjectCard({
 	const iconSize = 26
 
 	const { mutate: deleteProject } = useDeleteProject(_id)
-	const role = AuthStore(state => state.role)
 
 	const handleDelete = () => {
 		const proName = prompt(
@@ -50,10 +48,10 @@ export default function ProjectCard({
 					<p>Created At: {formatDate(createdAt)}</p>
 					<p>Organization: {organization?.name}</p>
 					<div className='card-actions justify-end'>
-						<div className='badge badge-outline'>
+						<div className='badge badge-primary px-5 py-4'>
 							Actors: {actors.length}
 						</div>
-						<div className='badge badge-outline'>
+						<div className='badge badge-success px-5 py-4'>
 							Use Cases: {useCases.length}
 						</div>
 					</div>

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import Navigator from '../../components/Navigator'
 import OrganizationItem from '../../components/OrganizationItem'
 import useCreatedOrgs from '../../lib/hooks/organizations/useCreatedOrgs'
 import { OrgInfo } from '../../types/orgs'
@@ -14,9 +15,11 @@ export default function Listing() {
 		)
 
 	return (
-		<>
+		<div className='p-5'>
+			<Navigator />
+
 			<Link to='/dashboard/organization/create'>
-				<button className='btn btn-primary mx-5 mt-10' type='button'>
+				<button className='btn btn-primary mt-10' type='button'>
 					Create Organization
 				</button>
 			</Link>
@@ -41,6 +44,6 @@ export default function Listing() {
 					)}
 				</div>
 			)}
-		</>
+		</div>
 	)
 }

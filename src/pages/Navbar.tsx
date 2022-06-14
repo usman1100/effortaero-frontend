@@ -9,7 +9,7 @@ export default function Navbar() {
 	const redirect = useNavigate()
 
 	return (
-		<div className='navbar bg-primary'>
+		<div className='navbar bg-primary drop-shadow-lg'>
 			<div className='flex-1'>
 				<p className='btn btn-ghost normal-case text-xl'>
 					{isLoading

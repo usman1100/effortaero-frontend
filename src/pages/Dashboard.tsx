@@ -88,7 +88,7 @@ export default function Dashboard() {
 		<div>
 			<Navbar />
 			<div className='grid grid-cols-5 h-screen'>
-				<div className='px-3 border-r-2'>
+				<div className='px-3 border-r-2 bg-slate-200'>
 					{routeItems.length &&
 						routeItems.map(({ url, icon }, index) => (
 							<Link to={`/dashboard/${url}`} key={url}>
@@ -97,8 +97,8 @@ export default function Dashboard() {
 									type='button'
 									onClick={() => setSelectedItem(index)}
 									className={`btn 
-							capitalize w-full my-2
-							${index === selectedItem ? 'btn-primary' : 'btn-outline'}
+							capitalize w-full my-2 rounded-none
+							${index === selectedItem ? 'btn-primary' : `btn-outline bg-slate-50`}
 							${index === 0 ? 'mt-10' : ''}
 							`}
 								>

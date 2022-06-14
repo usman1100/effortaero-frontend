@@ -74,7 +74,7 @@ function UploadAttributes() {
 					Drop Here
 				</button>
 			) : (
-				<button className='btn btn-primary w-full' type='button'>
+				<button className='btn btn-success w-full' type='button'>
 					Update Attributes
 				</button>
 			)}
@@ -145,7 +145,7 @@ export default function Info() {
 			<hr />
 
 			<Link to={`/dashboard/projects/${id}/estimates`}>
-				<button type='button' className='btn btn-primary mt-10 mb-10'>
+				<button type='button' className='btn btn-info mt-10 mb-10'>
 					<BsGear size={28} className='mr-2' /> Calculate Estimates
 				</button>
 			</Link>
