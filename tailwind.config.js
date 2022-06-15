@@ -3,7 +3,7 @@ module.exports = {
 	theme: {
 		extend: {},
 		fontFamily: {
-			sans: ['Quicksand', 'Poppins', 'Raleway'],
+			sans: ['Inter', 'monospace', 'Raleway'],
 		},
 	},
 	safelist: ['bg-amber-400'],
