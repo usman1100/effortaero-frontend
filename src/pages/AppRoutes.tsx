@@ -6,6 +6,7 @@ import Auth from './Auth'
 import Dashboard from './Dashboard'
 import Delhpi from './Delphi'
 import DelhpiRound from './DelphiRound'
+import Ensemble from './Ensemble'
 import MachineLearning from './MachineLearning'
 import NewProject from './NewProject'
 import Create from './Organization/Create'
@@ -57,6 +58,11 @@ export default function AppRoutes() {
 							<Route
 								path='/dashboard/projects/:id/ucp'
 								element={<UCP />}
+							/>
+
+							<Route
+								path='/dashboard/projects/:id/ensemble'
+								element={<Ensemble />}
 							/>
 
 							<Route

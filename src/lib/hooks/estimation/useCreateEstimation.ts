@@ -6,6 +6,7 @@ export enum EstimationEnum {
 	ML = 'ml',
 	UCP = 'ucp',
 	DELPHI = 'delphi',
+	ENSEMBLE = 'ensemble',
 }
 
 export default function useCreateEstimation(

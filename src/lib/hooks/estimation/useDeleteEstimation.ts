@@ -1,22 +1,33 @@
 import toast from 'react-hot-toast'
 import { useMutation, useQueryClient } from 'react-query'
 import EstimationService from '../../api/estimation.service'
+import { EstimationEnum } from './useCreateEstimation'
 
 const useDeleteEstimation = (id: string, projectID: string) => {
 	const estAPI = new EstimationService()
 	const queryClient = useQueryClient()
 	return useMutation(() => estAPI.deleteOne(id), {
 		onSuccess: async () => {
-			await queryClient.invalidateQueries(['estimation', projectID, 'ml'])
 			await queryClient.invalidateQueries([
 				'estimation',
 				projectID,
-				'delphi',
+				EstimationEnum.ML,
 			])
 			await queryClient.invalidateQueries([
 				'estimation',
 				projectID,
-				'ucp',
+				EstimationEnum.DELPHI,
+			])
+			await queryClient.invalidateQueries([
+				'estimation',
+				projectID,
+				EstimationEnum.UCP,
+			])
+
+			await queryClient.invalidateQueries([
+				'estimation',
+				projectID,
+				EstimationEnum.ENSEMBLE,
 			])
 			toast.success('Deleted successfully!')
 		},

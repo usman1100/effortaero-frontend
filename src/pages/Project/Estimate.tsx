@@ -10,7 +10,7 @@ export default function Estimate() {
 			<h1 className='text-5xl mt-5'>Estimate</h1>
 			<hr />
 
-			<div className='my-5 grid grid-cols-1 gap-5'>
+			<div className='my-5 grid grid-cols-2 gap-5 justify-center'>
 				<Link to={`/dashboard/projects/${id}/ml`}>
 					<div className='estimation-card bg-yellow-200'>
 						<p className='text-2xl font-bold'>Machine Learning</p>
@@ -29,6 +29,16 @@ export default function Estimate() {
 					<div className='estimation-card bg-fuchsia-200'>
 						<p className='text-2xl font-bold'>Delphi Method</p>
 						<p>Use our custom trained machine learning engine </p>
+					</div>
+				</Link>
+
+				<Link to={`/dashboard/projects/${id}/ensemble`}>
+					<div className='estimation-card bg-lime-300'>
+						<p className='text-2xl font-bold'>Ensemble Model</p>
+						<p>
+							Joining the results of all estimations using
+							advanced ensembling techniques
+						</p>
 					</div>
 				</Link>
 			</div>
