@@ -18,7 +18,7 @@ export default function OrganizationItem({
 	id,
 }: props) {
 	return (
-		<div className='card  bg-base-100 shadow-xl mx-5 my-2'>
+		<div className='card  bg-base-100 shadow-2xl mx-5 my-2'>
 			<div className='card-body'>
 				<h2 className='font-bold text-2xl'>{name}</h2>
 
@@ -34,7 +34,7 @@ export default function OrganizationItem({
 							{members > 1 ? 'Members' : 'Member'}
 						</p>
 					</div>
-				):null}
+				) : null}
 				<div className='card-actions justify-end'>
 					<Link to={`/dashboard/organization/${id}`}>
 						<button type='button' className='btn btn-primary'>

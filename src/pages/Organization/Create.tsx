@@ -1,6 +1,6 @@
 import { useFormik } from 'formik'
-import { Link } from 'react-router-dom'
 import BackButton from '../../components/BackButton'
+import Navigator from '../../components/Navigator'
 import useCreateNewOrg from '../../lib/hooks/organizations/useCreateNewOrg'
 
 export default function Create() {
@@ -18,6 +18,7 @@ export default function Create() {
 
 	return (
 		<div className='p-5'>
+			<Navigator />
 			<BackButton />
 			<h1 className='text-4xl my-5'>Create An Organization</h1>
 			<form onSubmit={formik.handleSubmit} className=' p-4 rounded-lg'>

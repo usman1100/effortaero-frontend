@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom'
 import AddMember from '../../components/AddMember'
 import BackButton from '../../components/BackButton'
 import MemberCard from '../../components/MemberCard'
+import Navigator from '../../components/Navigator'
 import ProjectCard from '../../components/ProjectCard'
 import useGetOrgInfo from '../../lib/hooks/organizations/useGetOrgInfo'
 import useGetProjectByOrg from '../../lib/hooks/projects/useGetProjectByOrg'
@@ -22,6 +23,7 @@ export default function Info() {
 
 	return (
 		<div className='p-5'>
+			<Navigator />
 			<BackButton />
 			{isLoading ? (
 				<h1>Loading</h1>
