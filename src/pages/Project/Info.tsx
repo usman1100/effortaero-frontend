@@ -4,10 +4,11 @@ import { Link, useParams } from 'react-router-dom'
 import { IoMdHammer } from 'react-icons/io'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
+import DataTable from 'react-data-table-component'
 import useGetProjectDetails from '../../lib/hooks/projects/useGetProjectDetails'
 import { Attribute } from '../../types/project'
 import { slugify } from '../../utils/misc'
-import { Actor } from '../NewProject'
+import { Actor, UseCase } from '../NewProject'
 import useUpdateProject from '../../lib/hooks/projects/useUpdateProject'
 import BackButton from '../../components/BackButton'
 
@@ -60,8 +61,6 @@ function UploadAttributes() {
 
 	useEffect(() => {
 		if (actors?.length && useCases?.length) {
-			console.log(actors, useCases)
-
 			mutate()
 		}
 	}, [actors, useCases])
@@ -128,6 +127,29 @@ export default function Info() {
 		}
 	}, [data])
 
+	const columns = [
+		{
+			name: 'Name',
+			selector: (row: any) => row.name,
+			sortable: true,
+			maxWidth: '5%',
+		},
+		{
+			name: 'Complexity',
+			selector: (row: any) => row.complexity,
+			sortable: true,
+			maxWidth: '5%',
+		},
+		{
+			name: 'Description',
+			selector: (row: any) => row.description,
+			sortable: true,
+		},
+	]
+
+	const [selectedActors, setSelectedActors] = useState<Actor[]>([])
+	const [selectedUseCases, setSelectedUseCases] = useState<UseCase[]>([])
+
 	return (
 		<div className='p-3'>
 			<BackButton />
@@ -164,36 +186,26 @@ export default function Info() {
 				</a>
 			</div>
 
-			<h1 className='text-2xl mb-3'>Actors</h1>
+			<h1 className='text-2xl mb-3 mt-5'>Actors</h1>
 
 			{data?.data?.data?.actors?.length ? (
-				<div className='overflow-x-auto mb-10'>
-					<table className='table w-full'>
-						<thead>
-							<tr>
-								<th> </th>
-								<th>Name</th>
-								<th>Complexity</th>
-								<th>Description</th>
-							</tr>
-						</thead>
-						<tbody>
-							{data?.data?.data?.actors?.map(
-								(actor: Attribute, index: number) => (
-									<tr key={JSON.stringify(actor)}>
-										<th>{index + 1}</th>
-										<td>{actor.name}</td>
-										<td>{actor.complexity}</td>
-										<td>
-											{actor?.description ||
-												'No description'}
-										</td>
-									</tr>
-								)
-							)}
-						</tbody>
-					</table>
-				</div>
+				<>
+					<DataTable
+						columns={columns}
+						data={data?.data?.data?.actors}
+						className='border-2'
+						selectableRows
+						pagination
+						onSelectedRowsChange={e => {
+							setSelectedActors(e.selectedRows)
+						}}
+					/>
+					{selectedActors.length > 0 && (
+						<button className='mb-10 btn btn-warning' type='button'>
+							Delete Actors
+						</button>
+					)}
+				</>
 			) : (
 				<div className='flex items-center'>
 					<div className='alert alert-warning shadow-lg my-5 w-1/2'>
@@ -224,31 +236,15 @@ export default function Info() {
 
 			{data?.data?.data?.useCases?.length ? (
 				<div className='overflow-x-auto'>
-					<table className='table w-full'>
-						<thead>
-							<tr>
-								<th> </th>
-								<th>Name</th>
-								<th>Complexity</th>
-								<th>Description</th>
-							</tr>
-						</thead>
-						<tbody>
-							{data?.data?.data?.useCases?.map(
-								(uc: Attribute, index: number) => (
-									<tr key={JSON.stringify(uc)}>
-										<th>{index + 1}</th>
-										<td>{uc.name}</td>
-										<td>{uc.complexity}</td>
-										<td>
-											{uc?.description ||
-												'No description'}
-										</td>
-									</tr>
-								)
-							)}
-						</tbody>
-					</table>
+					<DataTable
+						columns={columns}
+						data={data?.data?.data?.useCases}
+						selectableRows={data?.data?.data?.useCases?.length > 1}
+						pagination
+						onSelectedRowsChange={e => {
+							setSelectedUseCases(e.selectedRows)
+						}}
+					/>
 				</div>
 			) : (
 				<div className='flex items-center'>

@@ -7,12 +7,11 @@ const useUpdateProject = (projectId: string, info: any) => {
 	const queryClient = useQueryClient()
 	return useMutation(() => projectAPI.updateOne(projectId, info), {
 		onSuccess: async () => {
-			await queryClient.invalidateQueries(['projects', projectId])
+			await queryClient.invalidateQueries(['project', projectId])
 			toast.success('Project updated successfully')
 		},
-		onError: error => {
+		onError: () => {
 			toast.error('Some error has occured, check logs')
-			console.error(error)
 		},
 	})
 }
