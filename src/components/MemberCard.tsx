@@ -1,6 +1,7 @@
 import Avatar from 'react-avatar'
 import toast from 'react-hot-toast'
 import useRemoveMember from '../lib/hooks/auth/useRemoveMember'
+import AuthStore from '../lib/state/authStore'
 import { formatDate } from '../utils/datetime'
 
 interface props {
@@ -18,6 +19,7 @@ interface user {
 }
 
 export default function MemberCard({ userID, createdAt, _id }: props) {
+	const role = AuthStore(state => state.role)
 	const { mutate } = useRemoveMember(_id)
 	const removeMember = () => {
 		const email = prompt(
@@ -58,15 +60,17 @@ export default function MemberCard({ userID, createdAt, _id }: props) {
 				</h1>
 			</div>
 
-			<div className='col-span-1'>
-				<button
-					type='button'
-					className='btn btn-warning'
-					onClick={removeMember}
-				>
-					Remove
-				</button>
-			</div>
+			{role === 'owner' ? (
+				<div className='col-span-1'>
+					<button
+						type='button'
+						className='btn btn-warning'
+						onClick={removeMember}
+					>
+						Remove
+					</button>
+				</div>
+			) : null}
 		</div>
 	)
 }
