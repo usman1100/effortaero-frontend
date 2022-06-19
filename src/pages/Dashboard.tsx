@@ -34,11 +34,11 @@ const ownerItems = [
 
 const userItems = [
 	{
-		url: 'organization',
+		url: 'Profile',
 		icon: <BsBuilding className='mr-2' size={iconSize} />,
 	},
 	{
-		url: 'Profile',
+		url: 'organization',
 		icon: <BsBuilding className='mr-2' size={iconSize} />,
 	},
 	{
