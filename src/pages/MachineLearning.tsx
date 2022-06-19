@@ -5,6 +5,7 @@ import useCreateEstimation, {
 import useGetEstimations from '../lib/hooks/estimation/useGetEstimations'
 import BackButton from '../components/BackButton'
 import EstimationCard from '../components/EstimationCard'
+import Navigator from '../components/Navigator'
 
 export default function MachineLearning() {
 	const { id } = useParams()
@@ -20,7 +21,8 @@ export default function MachineLearning() {
 
 	return (
 		<div className='p-5'>
-			<BackButton />
+			<Navigator />
+			<BackButton className='my-5' />
 
 			<h1 className='text-5xl mb-5'>Machine Learning</h1>
 

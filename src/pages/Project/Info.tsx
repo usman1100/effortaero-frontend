@@ -11,6 +11,7 @@ import { slugify } from '../../utils/misc'
 import { Actor, UseCase } from '../NewProject'
 import useUpdateProject from '../../lib/hooks/projects/useUpdateProject'
 import BackButton from '../../components/BackButton'
+import Navigator from '../../components/Navigator'
 
 function UploadAttributes() {
 	const [actors, setActors] = useState<Actor[]>([])
@@ -152,8 +153,8 @@ export default function Info() {
 
 	return (
 		<div className='p-3'>
-			<BackButton />
-
+			<Navigator />
+			<BackButton className='my-5' />
 			<h2>{isLoading && <div>Loading...</div>}</h2>
 			<h1 className='text-4xl text-center mt-4'>
 				{data?.data?.data?.name}

@@ -1,6 +1,7 @@
 import { Link, useParams } from 'react-router-dom'
 import BackButton from '../components/BackButton'
 import EstimationCard from '../components/EstimationCard'
+import Navigator from '../components/Navigator'
 import useCreateDelphiRounds from '../lib/hooks/estimation/useCreateDelphiRound'
 import useCreateEstimation, {
 	EstimationEnum,
@@ -34,7 +35,8 @@ export default function Delhpi() {
 
 	return (
 		<div className='p-5'>
-			<BackButton />
+			<Navigator />
+			<BackButton className='my-5' />
 			<h1 className='text-5xl'>Delphi Estimates</h1>
 			<div className='grid grid-cols-5'>
 				{estimates && estimates?.data?.data?.length ? (

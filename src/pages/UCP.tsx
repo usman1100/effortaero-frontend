@@ -7,6 +7,7 @@ import useCreateEstimation, {
 import useGetEstimations from '../lib/hooks/estimation/useGetEstimations'
 import { formatDate, formatTime } from '../utils/datetime'
 import BackButton from '../components/BackButton'
+import Navigator from '../components/Navigator'
 
 function EstimationCard({ data }: { data: any }) {
 	const { id: projectID } = useParams()
@@ -53,7 +54,8 @@ export default function UCP() {
 
 	return (
 		<div className='p-5'>
-			<BackButton />
+			<Navigator />
+			<BackButton className='my-5' />
 
 			<h1 className='text-5xl mb-5'>UCP Calculation</h1>
 

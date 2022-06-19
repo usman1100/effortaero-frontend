@@ -1,6 +1,7 @@
 import { useFormik } from 'formik'
 import { useParams } from 'react-router-dom'
 import BackButton from '../components/BackButton'
+import Navigator from '../components/Navigator'
 import useAddContribution from '../lib/hooks/estimation/useAddContribution'
 import useEndRound from '../lib/hooks/estimation/useEndRound'
 import useGetOneDelphiRound from '../lib/hooks/estimation/useGetOneDelphiRound'
@@ -33,7 +34,8 @@ export default function DelhpiRound() {
 
 	return (
 		<div className='p-5'>
-			<BackButton />
+			<Navigator />
+			<BackButton className='my-5' />
 			<h1 className='text-5xl'>Delphi Round</h1>
 			<h1 className='text-2xl mt-10'>Contributions</h1>
 

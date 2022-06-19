@@ -16,8 +16,6 @@ export default function Listing() {
 
 	return (
 		<div className='p-5'>
-			<Navigator />
-
 			<Link to='/dashboard/organization/create'>
 				<button className='btn btn-primary mt-10' type='button'>
 					Create Organization

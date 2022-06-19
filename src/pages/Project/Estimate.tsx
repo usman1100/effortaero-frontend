@@ -1,12 +1,14 @@
 import { Link, useParams } from 'react-router-dom'
 import BackButton from '../../components/BackButton'
+import Navigator from '../../components/Navigator'
 
 export default function Estimate() {
 	const { id } = useParams()
 
 	return (
 		<div className='p-5'>
-			<BackButton />
+			<Navigator />
+			<BackButton className='my-5' />
 			<h1 className='text-5xl mt-5'>Estimate</h1>
 			<hr />
 
