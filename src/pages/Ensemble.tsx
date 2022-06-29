@@ -60,7 +60,7 @@ export default function Ensemble() {
 			{estimations && (
 				<div>
 					{estimations?.data?.data?.length > 0 ? (
-						<div className='grid grid-cols-4'>
+						<div className='grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2'>
 							{estimations?.data?.data?.map((estimation: any) => (
 								<EstimationCard
 									data={estimation}

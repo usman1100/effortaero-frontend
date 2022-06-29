@@ -29,7 +29,7 @@ export default function MachineLearning() {
 			<h1 className='text-2xl '>Your Estimations</h1>
 
 			{estimations && (
-				<div className='grid grid-cols-4'>
+				<div className='grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2'>
 					{estimations?.data?.data?.map((estimation: any) => (
 						<EstimationCard
 							data={estimation}

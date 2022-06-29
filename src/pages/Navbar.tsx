@@ -11,7 +11,7 @@ export default function Navbar() {
 	return (
 		<div className='navbar bg-primary drop-shadow-lg'>
 			<div className='flex-1'>
-				<p className='btn btn-ghost normal-case text-xl'>
+				<p className='btn btn-ghost normal-case text-xl text-slate-50'>
 					{isLoading
 						? 'Loading ...'
 						: `Welcome, ${data?.data?.data?.name}` ||

@@ -23,14 +23,14 @@ export default function Estimate() {
 				<Link to={`/dashboard/projects/${id}/ucp`}>
 					<div className='estimation-card bg-teal-200'>
 						<p className='text-2xl font-bold'>UCP Calculation</p>
-						<p>Use our custom trained machine learning engine </p>
+						<p>The battle tested Use Case Point estimation method calculator</p>
 					</div>
 				</Link>
 
 				<Link to={`/dashboard/projects/${id}/delphi`}>
 					<div className='estimation-card bg-fuchsia-200'>
 						<p className='text-2xl font-bold'>Delphi Method</p>
-						<p>Use our custom trained machine learning engine </p>
+						<p>Interact with your peers, run through multiple rounds and create the perfect estimation</p>
 					</div>
 				</Link>
 

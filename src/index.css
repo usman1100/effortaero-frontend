@@ -8,5 +8,5 @@
 @tailwind utilities;
 
 .estimation-card {
-	@apply grid grid-flow-row text-center text-slate-900 h-36 justify-center content-center rounded-2xl cursor-pointer hover:border-2;
+	@apply grid grid-flow-row text-center text-slate-900 h-36 justify-center content-center rounded-2xl cursor-pointer hover:border-2 p-5;
 }

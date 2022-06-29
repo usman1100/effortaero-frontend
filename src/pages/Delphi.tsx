@@ -38,7 +38,7 @@ export default function Delhpi() {
 			<Navigator />
 			<BackButton className='my-5' />
 			<h1 className='text-5xl'>Delphi Estimates</h1>
-			<div className='grid grid-cols-5'>
+			<div className='grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2'>
 				{estimates && estimates?.data?.data?.length ? (
 					<>
 						{estimates.data.data.map((e: any) => (

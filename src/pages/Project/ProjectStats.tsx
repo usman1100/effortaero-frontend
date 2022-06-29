@@ -32,13 +32,23 @@ export default function ProjectStats() {
 		id as string,
 		EstimationEnum.DELPHI
 	)
+	const { data: ensemble } = useGetEstimations(
+		id as string,
+		EstimationEnum.ENSEMBLE
+	)
 
 	const data = [
 		ml?.data?.data[0]?.value || 0,
 		ucp?.data?.data[0]?.value || 0,
 		delphi?.data?.data[0]?.value || 0,
+		ensemble?.data?.data[0]?.value || 0,
 	]
-	const labels = ['Machine Learning', 'Use Case Points', 'Delphi Estimations']
+	const labels = [
+		'Machine Learning',
+		'Use Case Points',
+		'Delphi Estimations',
+		'Ensebmle Model',
+	]
 
 	const colors = [
 		'#FF6384',
@@ -118,6 +128,18 @@ export default function ProjectStats() {
 							backgroundColor: colors[2],
 							borderWidth: 5,
 							borderColor: colors[2],
+							fill: true,
+							showLine: true,
+						},
+
+						{
+							label: 'Esnemble Estimations',
+							data: ensemble?.data?.data?.map(
+								(est: any) => est.value
+							),
+							backgroundColor: colors[3],
+							borderWidth: 5,
+							borderColor: colors[3],
 							fill: true,
 							showLine: true,
 						},
